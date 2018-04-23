@@ -75,10 +75,6 @@ training:
       date: September 2017
       link: https://appsecusa2017.sched.com/event/B26a/hands-on-security-in-devops-and-application-security-automation-workshop-1-of-2-days?iframe=no&w=100%&sidebar=no&bg=no
 
-#List of interesting Github repo/projects to include - optional
-#github:
-# - benrobot/EyesOnMars
-
 #Stackoverflow flair is optional
 stackoverflow:
    profileurl: https://stackoverflow.com/users/3166133/benrobot
