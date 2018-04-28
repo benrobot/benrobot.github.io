@@ -5,7 +5,6 @@
 	<div class="content-rounded-panel">
 		<div>
 					{% for role in site.roles %}
-						<tr>
 							<strong>{{role.title}}</strong> {{role.employer}} ({{role.employer_description}})<br/>
 							{{role.start}} - {{role.end}}<br/>
 							{% for item in role.description %}
