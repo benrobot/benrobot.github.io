@@ -125,7 +125,7 @@ edx:
 
 training:
    courses:
-    - title: "SANS Secure Coding in .NET: Developing Defensible Applications"
+    - title: "DEV544: SANS Secure Coding in .NET: Developing Defensible Applications"
       date: April 2018
       link: https://www.sans.org/course/secure-coding-net-developing-defensible-applications
     - title: SANS Core NetWars Experience
