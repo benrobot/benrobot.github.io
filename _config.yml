@@ -7,6 +7,9 @@ location: Tampa, FL
 # Build settings
 markdown: kramdown
 
+# Google analytics tracking id (optional)
+ga_tracking_id: UA-118349925-1
+
 #User specific content
 #Links that will appear in the navbar
 primarylinks:
