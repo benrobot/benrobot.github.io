@@ -50,6 +50,7 @@ skills:
  - Lua
  - VBA
  - SQL
+ - Selenium
 
 #Work experience is required
 roles:
@@ -91,7 +92,7 @@ roles:
     - Wrote Wireshark dissector for network communication with USMC Tactical Environment (Lua)
     - Identified and implemented a database to combine multiple lists of software assets (SQL, VBA) and later converted database access to MS SQL and ASP.NET MVC (C# Razor, T-SQL)
     - Participated in numerous Kaizen workshops focusing on subjects ranging from software development best practices to identifying tools for saving money
-    - Coordinated and presented training for software engineers on Automated Testing, Static Code Analysis, and Software Product Lines (Fitnesse, GoogleTest)
+    - Coordinated and presented training for software engineers on Automated Testing, Static Code Analysis, and Software Product Lines (Fitnesse, GoogleTest, Selenium)
     - Developed tool converting Ant XML build instructions to Visual Studio format (C++)
     - Team lead for deployment and institutionalizing internally developed Software Production Line tool
  - title: Quality Assurance and Regulatory Affairs Manager
