@@ -127,6 +127,6 @@ stackoverflow:
 
 #An additional info freetext section is optional at the bottom of the page - can be text or HTML
 additionalinfo: |
-   <strong>TDD</strong>: I am proponent of Test Driven Development. I have written tests in Java, C#, C++ Python, Ruby, JavaScript, and even Powershell and SQL. I developed and performed training in automated testing for over 100 developers.<br/><br/>
+   <strong>TDD</strong>: I am a proponent of Test Driven Development. I have written tests in Java, C#, C++ Python, Ruby, JavaScript, and even Powershell and SQL. I developed and performed training in automated testing for over 100 developers.<br/><br/>
    <strong>Application Security</strong>: In addition to fixing various common sense vulnerabilities (like unauthenticated access and SQL injection) I have begun applying skills learned at various security related training courses.<br/><br/>
    <strong>Spoken Languages</strong>: Native English and Spanish speaker<br/><br/>
