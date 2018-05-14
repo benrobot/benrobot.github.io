@@ -4,7 +4,7 @@
 	</div>
 	<div class="content-rounded-panel">
 		<div>
-					{% for role in site.roles %}
+					{% for role in site.data.resume.roles %}
 							<strong>{{role.title}}</strong> {{role.employer}} ({{role.employer_description}})<br/>
 							{{role.start}} - {{role.end}}<br/>
 							{% for item in role.description %}

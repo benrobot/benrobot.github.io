@@ -1,11 +1,11 @@
-{% if site.edx %}
+{% if site.data.resume.edx %}
 	<div id="coursesBubble" class="rounded_panel txt_lightgrey">
 		<div class="top-rounded-panel grey-bg">
-			<h1>edX.org (<a target='_blank' href="{{site.edx.profileurl}}">view profile</a>)</h1>
+			<h1>edX.org (<a target='_blank' href="{{site.data.resume.edx.profileurl}}">view profile</a>)</h1>
 		</div>
 		<div class="content-rounded-panel">
 			<div id="edxPanel">
-				{% for course in site.edx.courses %}
+				{% for course in site.data.resume.edx.courses %}
 				<div class="row">
 					{% if course.optionalimage %}
 						<div class="col-sm-5">

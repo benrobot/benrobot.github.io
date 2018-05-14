@@ -1,11 +1,11 @@
-{% if site.training %}
+{% if site.data.resume.training %}
 	<div id="coursesBubble" class="rounded_panel txt_lightgrey">
 		<div class="top-rounded-panel grey-bg">
 			<h1>Training</h1>
 		</div>
 		<div class="content-rounded-panel">
 			<div id="trainingPanel">
-				{% for course in site.training.courses %}
+				{% for course in site.data.resume.training.courses %}
 				<div class="row">
 					<div class="col-sm-6">
 						<a target='_blank' href="{{course.link}}">

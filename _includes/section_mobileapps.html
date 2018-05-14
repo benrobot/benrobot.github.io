@@ -1,4 +1,4 @@
-{% if site.apps %}
+{% if site.data.resume.apps %}
 	<div class="rounded_panel txt_lightgrey">
 		<div class="top-rounded-panel grey-bg">
 			<h1>Mobile Portfolio</h1>
@@ -15,7 +15,7 @@
 						</tr>
 					</thead>
 					<tbody>
-						{% for app in site.apps %}
+						{% for app in site.data.resume.apps %}
 							<tr>
 								<td>{{app.name}}</td>
 								<td>{{app.platform}}</td>
