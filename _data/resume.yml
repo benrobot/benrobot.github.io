@@ -5,10 +5,12 @@ intro_blurb: |
 #Any buzzword skills you want to include
 skills:
  - Java
- - C#
- - JavaScript
  - Gradle
  - Groovy
+ - Eclipse
+ - InlelliJ IDEA
+ - C#
+ - JavaScript
  - Chef
  - Unit Testing
  - XUnit
@@ -25,6 +27,7 @@ skills:
  - CometD
  - C++
  - Ada
+ - Wireshark
  - Lua
  - VBA
  - SQL
