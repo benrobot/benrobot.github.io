@@ -77,7 +77,7 @@ roles:
     - Coordinated and presented training for software engineers on Automated Testing, Static Code Analysis, and Software Product Lines (Fitnesse, GoogleTest, Selenium)
     - Developed tool converting Ant XML build instructions to Visual Studio format (C++)
     - Team lead for deployment and institutionalizing internally developed Software Production Line tool
- - title: Quality Assurance and Regulatory Affairs Manager
+ - title: Quality Assurance and Regulatory Affairs Manager / Software Developer
    start: Dec 2003
    end: Jan 2013
    employer: IsoAid, LLC, Port Richey, FL
@@ -85,7 +85,8 @@ roles:
    description: 
     - Research solutions for validation, auditing, documentation and manufacturing improvements
     - Compare and purchase equipment for sterilization, validation, sterile sealing, and automation
-    - Maintained and upgraded multiple companywide databases from MS Access to MS SQL Server
+    - Maintained and upgraded multiple companywide databases from MS Access to MS SQL Server (VBA)
+    - Optimized Iodine-125 and Palladium-103 decay and tracking systems in MS Access and Excel (VBA)
     - Performed both software and equipment validation on critical systems
     - Developed and executed validation protocol for electronic signatures
     - Managed simultaneous deadlines for regulatory and quality goals
