@@ -29,6 +29,9 @@ skills:
  - VBA
  - SQL
  - Selenium
+ - VirtualBox
+ - VMware Workstation
+ - Docker
 
 #Work experience is required
 roles:
@@ -39,6 +42,7 @@ roles:
    employer_description: Background Investigation and Applicant Processing
    description: 
     - Maintain and upgrade legacy Java based systems while launching new systems using .NET (C#, XUnit)
+    - Model automated containerized deployment strategies (VirtualBox, VMware Workstation, Docker)
     - Integrated credit card / ACH payment system to allow applicants to pre-pay client specified fees (Java, C#)
     - Created rule based system for automated appointment of insurance agents (C#)
     - Implement unit testing for SQL functions
