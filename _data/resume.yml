@@ -105,14 +105,6 @@ education:
    subject: Computer Engineering
    school: University of South Florida
 
-#This section is optional (as is the image link below)
-edx:
-   profileurl: https://courses.edx.org/u/benrobot
-   courses:
-    - title: "CS169.1x: Software as a Service (Ruby)"
-      link: https://s3.amazonaws.com/verify.edx.org/downloads/76cd2c64453b46ea903391c4cdd6d02a/Certificate.pdf
-      date: June 16, 2014
-
 training:
    courses:
     - title: "DEV544: SANS Secure Coding in .NET: Developing Defensible Applications"
@@ -124,9 +116,15 @@ training:
     - title: "OWASP AppSec USA: Hands On Security in DevOps and Application Security Automation Workshop"
       date: September 2017
       link: https://appsecusa2017.sched.com/event/B26a/hands-on-security-in-devops-and-application-security-automation-workshop-1-of-2-days?iframe=no&w=100%&sidebar=no&bg=no
+    - title: "CS169.1x: Software as a Service (Ruby)"
+      date: June 2014
+      link: https://s3.amazonaws.com/verify.edx.org/downloads/76cd2c64453b46ea903391c4cdd6d02a/Certificate.pdf
     - title: "Software Verification & Validation Strategies (by Noblitt and Rueland)"
+      date: 2010
     - title: "ISO 14971:2007 Medical devices -- Application of risk management to medical devices"
+      date: 2008
     - title: "ISO 13485:2003 Medical devices -- Quality management systems -- Requirements for regulatory purposes"
+      date: 2005
 
 #Stackoverflow flair is optional
 stackoverflow:
