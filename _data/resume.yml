@@ -23,6 +23,8 @@ skills:
  - Google Test
  - Apex
  - VisualForce
+ - Salesforce DX
+ - Ant
  - PdfBox
  - CometD
  - C++
@@ -58,11 +60,12 @@ roles:
    employer: Qualityze Inc., Tampa, FL
    employer_description: Qualityze Systems for Regulated Industries
    description: 
+    - Research managed package automation to scratch orgs (Salesforce DX, Ant)
     - Build Qualityze Management System as Salesforce managed package using custom VisualForce pages (Apex, VisualForce)
     - Implement PDF manipulation using Java running on Heroku uploading to various salesforce orgs (Java, PdfBox, Apex, cometD)
     - Create method to perform VisualForce injection to increase flexibility of Salesforce managed package (VisualForce)
     - Diagnose slow pages in Salesforce and design method to reduce load time
-    - Design and implement deployment process accounting for lack of source control and automation in Salesforce
+    - Design deployment process around github and lack of automation in Salesforce
  - title: Software Engineer
    start: Jan 2013
    end: Sep 2015
