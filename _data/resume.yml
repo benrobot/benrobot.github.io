@@ -61,7 +61,8 @@ roles:
    employer_description: Qualityze Systems for Regulated Industries
    description: 
     - Research managed package automation to scratch orgs (Salesforce DX, Ant)
-    - Build Qualityze Management System as Salesforce managed package using custom VisualForce pages (Apex, VisualForce)
+    - Build Quality System as Salesforce managed package (Apex, VisualForce)
+    - Architect and implement Salesforce managed package secure feature manager
     - Implement PDF manipulation using Java running on Heroku uploading to various salesforce orgs (Java, PdfBox, Apex, cometD)
     - Create method to perform VisualForce injection to increase flexibility of Salesforce managed package (VisualForce)
     - Diagnose slow pages in Salesforce and design method to reduce load time
