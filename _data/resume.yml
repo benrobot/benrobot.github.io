@@ -11,6 +11,8 @@ skills:
  - InlelliJ IDEA
  - C#
  - JavaScript
+ - TypeScript
+ - Angular6
  - Chef
  - Unit Testing
  - XUnit
@@ -46,7 +48,7 @@ roles:
    employer: Applicant Insight / NoMoreForms, New Port Richey, FL
    employer_description: Background Investigation and Applicant Processing
    description: 
-    - Maintain and upgrade legacy Java based systems while launching new systems using .NET (C#, XUnit)
+    - Maintain and upgrade legacy Java based systems while launching new systems using .NET (C#, XUnit, Angular6, TypeScript)
     - Model automated containerized deployment strategies (VirtualBox, VMware Workstation, Docker)
     - Integrated credit card / ACH payment system to allow applicants to pre-pay client specified fees (Java, C#)
     - Created rule based system for automated appointment of insurance agents (C#)
@@ -113,7 +115,7 @@ training:
    courses:
     - title: "DEV544: SANS Secure Coding in .NET: Developing Defensible Applications"
       date: April 2018
-      link: https://www.sans.org/course/secure-coding-net-developing-defensible-applications
+      link: https://www.youracclaim.com/badges/1a48c4c3-c033-4216-b298-5dc29ba61d5c/linked_in_profile
     - title: SANS Core NetWars Experience
       date: April 2018
       link: https://www.sans.org/netwars/tournament
