@@ -47,7 +47,7 @@ roles:
    end: Present
    employer: Applicant Insight / NoMoreForms, New Port Richey, FL
    employer_description: Background Investigation and Applicant Processing
-   description: 
+   description:
     - Maintain and upgrade legacy Java based systems while launching new systems using .NET (C#, XUnit, Angular6, TypeScript)
     - Model automated containerized deployment strategies (VirtualBox, VMware Workstation, Docker)
     - Integrated credit card / ACH payment system to allow applicants to pre-pay client specified fees (Java, C#)
@@ -61,7 +61,7 @@ roles:
    end: Mar 2018
    employer: Qualityze Inc., Tampa, FL
    employer_description: Qualityze Systems for Regulated Industries
-   description: 
+   description:
     - Research managed package automation to scratch orgs (Salesforce DX, Ant)
     - Build Quality System as Salesforce managed package (Apex, VisualForce)
     - Architect and implement Salesforce managed package secure feature manager
@@ -74,7 +74,7 @@ roles:
    end: Sep 2015
    employer: CAE USA Inc, Tampa, FL
    employer_description: Military Training Simulation with Active Security Clearance
-   description: 
+   description:
     - Enhanced Ant Contrib cpptasks to generate Visual Studio .sln file and desired .vcproj version to enable source code analysis (Java)
     - Deployed and maintained central build automation within secured IT environment (Opscode Chef)
     - Implemented wrapper over single Magnetic Variation model for multiple languages (Ada, C, C++)
@@ -91,7 +91,7 @@ roles:
    end: Jan 2013
    employer: IsoAid, LLC, Port Richey, FL
    employer_description: Medical Device Manufacturer
-   description: 
+   description:
     - Research solutions for validation, auditing, documentation and manufacturing improvements
     - Compare and purchase equipment for sterilization, validation, sterile sealing, and automation
     - Maintained and upgraded multiple companywide databases from MS Access to MS SQL Server (VBA)
@@ -113,6 +113,8 @@ education:
 
 training:
    courses:
+    - title: "DEV541: SANS Secure Coding in Java/JEE: Developing Defensible Applications"
+      date: April 2019 (certification pending)
     - title: "DEV544: SANS Secure Coding in .NET: Developing Defensible Applications"
       date: April 2018 (certified August 2018)
       link: https://www.youracclaim.com/badges/1a48c4c3-c033-4216-b298-5dc29ba61d5c/linked_in_profile
