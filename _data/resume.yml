@@ -13,7 +13,7 @@ skills:
  - .NET Core
  - JavaScript
  - TypeScript
- - Angular6
+ - Angular
  - React
  - Chef
  - Unit Testing
@@ -51,7 +51,7 @@ roles:
    employer: Applicant Insight / NoMoreForms, New Port Richey, FL
    employer_description: Background Investigation and Applicant Processing
    description:
-    - Maintain and upgrade legacy Java based systems while launching new systems using .NET (C#, XUnit, Angular6, TypeScript)
+    - Maintain and upgrade legacy Java based systems while launching new systems using .NET (C#, XUnit, Angular, TypeScript)
     - Model automated containerized deployment strategies (VirtualBox, VMware Workstation, Docker)
     - Integrated credit card / ACH payment system to allow applicants to pre-pay client specified fees (Java, C#)
     - Created rule based system for automated appointment of insurance agents (C#)
