@@ -1,5 +1,5 @@
 intro_blurb: |
-   I am a software architect (2 years) and full stack developer (6 years) with experience in application security as well as unit and integration testing.
+   I am a software architect (4 years) and full stack developer (7 years) with experience in application security as well as unit and integration testing.
    My wide range of skills with languages and tools allows for innovative solutions to new problems.
 
 #Any buzzword skills you want to include
@@ -10,9 +10,11 @@ skills:
  - Eclipse
  - InlelliJ IDEA
  - C#
+ - .NET Core
  - JavaScript
  - TypeScript
  - Angular6
+ - React
  - Chef
  - Unit Testing
  - XUnit
@@ -39,6 +41,7 @@ skills:
  - VirtualBox
  - VMware Workstation
  - Docker
+ - Kubernetes
 
 #Work experience is required
 roles:
@@ -56,12 +59,13 @@ roles:
     - Scripted application deployment using TDD (Powershell, Pester)
     - Improve Java coding practices by implementing custom logging, unit testing, and static code analysis (slf4j, junit4, junit5, ErrorProne, SonarQube)
     - Created Gradle build scripts for legacy Java applications with custom tasks for local deployment, build versions, and packaging (Java, Gradle, Groovy)
- - title: Software Architect
+ - title: Software Architect (Part-Time)
    start: Jul 2015
-   end: Mar 2018
+   end: Present
    employer: Qualityze Inc., Tampa, FL
    employer_description: Qualityze Systems for Regulated Industries
    description:
+    - Implement file conversion using Salesforce Platform Event and Heroku (Java)
     - Research managed package automation to scratch orgs (Salesforce DX, Ant)
     - Build Quality System as Salesforce managed package (Apex, VisualForce)
     - Architect and implement Salesforce managed package secure feature manager
@@ -69,6 +73,16 @@ roles:
     - Create method to perform VisualForce injection to increase flexibility of Salesforce managed package (VisualForce)
     - Diagnose slow pages in Salesforce and design method to reduce load time
     - Design deployment process around github and lack of automation in Salesforce
+ - title: Software Developer (Contractor)
+   start: Jan 2019
+   end: Present
+   employer: Baha'i National Center, Wilmette, IL
+   employer_description: Not-For-Profit Religious Organization
+   description: 
+    - Integrate MeetUp and Google Sheets with minimal impact to users (.NET Core, Kubernetes)
+    - Convert legacy pages from jQuery to React
+    - Consolidate source code repositories and CI/CD solutions
+    - Automate builds using Azure DevOps Build and Release Pipelines
  - title: Software Engineer
    start: Jan 2013
    end: Sep 2015
