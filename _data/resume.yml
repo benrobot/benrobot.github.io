@@ -61,6 +61,7 @@ roles:
     - Scripted application deployment using TDD (Powershell, Pester)
     - Improve Java coding practices by implementing custom logging, unit testing, and static code analysis (slf4j, junit4, junit5, ErrorProne, SonarQube)
     - Created Gradle build scripts for legacy Java applications with custom tasks for local deployment, build versions, and packaging (Java, Gradle, Groovy)
+    - Tweak legacy apps written with PowerBuilder in PowerScript
  - title: Software Architect (Part-Time)
    start: Jul 2015
    end: Present
