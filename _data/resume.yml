@@ -42,6 +42,8 @@ skills:
  - VMware Workstation
  - Docker
  - Kubernetes
+ - Blockchain
+ - TRON
 
 #Work experience is required
 roles:
@@ -83,6 +85,13 @@ roles:
     - Convert legacy pages from jQuery to React
     - Consolidate source code repositories and CI/CD solutions
     - Automate builds using Azure DevOps Build and Release Pipelines
+ - title: Software Developer (Contractor)
+   start: Dec 2018
+   end: Jan 2019
+   employer: iReward.io, Trinity, FL
+   employer_description: Blockchain Reward System
+   description:
+    - Create blockchain reward system on TRON Network (C#, Typescript, Angular)
  - title: Software Engineer
    start: Jan 2013
    end: Sep 2015
