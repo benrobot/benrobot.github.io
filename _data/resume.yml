@@ -53,14 +53,15 @@ roles:
    employer: Applicant Insight / NoMoreForms, New Port Richey, FL
    employer_description: Background Investigation and Applicant Processing
    description:
+    - Debug and diagnose obscure race conditions in various environments (JavaScript, Java, SQL)
     - Maintain and upgrade legacy Java based systems while launching new systems using .NET (C#, XUnit, Angular, TypeScript)
     - Model automated containerized deployment strategies (VirtualBox, VMware Workstation, Docker)
-    - Integrated credit card / ACH payment system to allow applicants to pre-pay client specified fees (Java, C#)
-    - Created rule based system for automated appointment of insurance agents (C#)
+    - Integrate credit card / ACH payment system to allow applicants to pre-pay client specified fees (Java, C#)
+    - Create rule based system for automated appointment of insurance agents (C#)
     - Implement unit testing for SQL functions
-    - Scripted application deployment using TDD (Powershell, Pester)
+    - Script application deployment using TDD (Powershell, Pester)
     - Improve Java coding practices by implementing custom logging, unit testing, and static code analysis (slf4j, junit4, junit5, ErrorProne, SonarQube)
-    - Created Gradle build scripts for legacy Java applications with custom tasks for local deployment, build versions, and packaging (Java, Gradle, Groovy)
+    - Create Gradle build scripts for legacy Java applications with custom tasks for local deployment, build versions, and packaging (Java, Gradle, Groovy)
     - Tweak legacy apps written with PowerBuilder in PowerScript
  - title: Software Architect (Part-Time)
    start: Jul 2015
@@ -82,6 +83,7 @@ roles:
    employer: Baha'i National Center, Wilmette, IL
    employer_description: Not-For-Profit Religious Organization
    description: 
+    - Optimize REST services from controller to database via LINQ and EF Core
     - Integrate MeetUp and Google Sheets with minimal impact to users (.NET Core, Kubernetes)
     - Convert legacy pages from jQuery to React
     - Consolidate source code repositories and CI/CD solutions
@@ -99,16 +101,16 @@ roles:
    employer: CAE USA Inc, Tampa, FL
    employer_description: Military Training Simulation with Active Security Clearance
    description:
-    - Enhanced Ant Contrib cpptasks to generate Visual Studio .sln file and desired .vcproj version to enable source code analysis (Java)
-    - Deployed and maintained central build automation within secured IT environment (Opscode Chef)
-    - Implemented wrapper over single Magnetic Variation model for multiple languages (Ada, C, C++)
-    - Created Visual Studio solution wizard to streamline adoption of software best practices (JavaScript)
-    - Supported multiple projects simultaneously; not the norm for recent hires (C++, C, Ada with Linux)
-    - Wrote Wireshark dissector for network communication with USMC Tactical Environment (Lua)
-    - Identified and implemented a database to combine multiple lists of software assets (SQL, VBA) and later converted database access to MS SQL and ASP.NET MVC (C# Razor, T-SQL)
-    - Participated in numerous Kaizen workshops focusing on subjects ranging from software development best practices to identifying tools for saving money
-    - Coordinated and presented training for software engineers on Automated Testing, Static Code Analysis, and Software Product Lines (Fitnesse, GoogleTest, Selenium)
-    - Developed tool converting Ant XML build instructions to Visual Studio format (C++)
+    - Enhance Ant Contrib cpptasks to generate Visual Studio .sln file and desired .vcproj version to enable source code analysis (Java)
+    - Deploy and maintained central build automation within secured IT environment (Opscode Chef)
+    - Implement wrapper over single Magnetic Variation model for multiple languages (Ada, C, C++)
+    - Create Visual Studio solution wizard to streamline adoption of software best practices (JavaScript)
+    - Support multiple projects simultaneously; not the norm for recent hires (C++, C, Ada with Linux)
+    - Write Wireshark dissector for network communication with USMC Tactical Environment (Lua)
+    - Identify and implement a database to combine multiple lists of software assets (SQL, VBA) and convert database access to MS SQL and ASP.NET MVC (C#)
+    - Participate in numerous Kaizen workshops focusing on subjects ranging from software development best practices to identifying tools for saving money
+    - Coordinate and present training for software engineers on Automated Testing, Static Code Analysis, and Software Product Lines (Fitnesse, GoogleTest, Selenium)
+    - Develop tool for converting Ant XML build instructions to Visual Studio format (C++)
     - Team lead for deployment and institutionalizing internally developed Software Production Line tool
  - title: Quality Assurance and Regulatory Affairs Manager / Software Developer
    start: Dec 2003
@@ -118,15 +120,15 @@ roles:
    description:
     - Research solutions for validation, auditing, documentation and manufacturing improvements
     - Compare and purchase equipment for sterilization, validation, sterile sealing, and automation
-    - Maintained and upgraded multiple companywide databases from MS Access to MS SQL Server (VBA)
-    - Optimized Iodine-125 and Palladium-103 decay and tracking systems in MS Access and Excel (VBA)
-    - Performed both software and equipment validation on critical systems
-    - Developed and executed validation protocol for electronic signatures
-    - Managed simultaneous deadlines for regulatory and quality goals
-    - Upgraded Quality Assurance System to allow paperless availability
-    - Submitted and received 510(k) submissions to the FDA
-    - Submitted and received medical license applications to Health Canada and EU notified body
-    - Created and executed sterilization validation protocols for both Ethylene Oxide and Steam sterilizers
+    - Maintain and upgrade multiple companywide databases from MS Access to MS SQL Server (VBA)
+    - Optimize Iodine-125 and Palladium-103 decay and tracking systems in MS Access and Excel (VBA)
+    - Perform both software and equipment validation on critical systems
+    - Develop and execute validation protocol for electronic signatures
+    - Manage simultaneous deadlines for regulatory and quality goals
+    - Upgrade Quality Assurance System to allow paperless availability
+    - Submit and receive 510(k) submissions to the FDA
+    - Submit and receive medical license applications to Health Canada and EU notified body
+    - Create and execute sterilization validation protocols for both Ethylene Oxide and Steam sterilizers
 
 #Education is required
 education:
