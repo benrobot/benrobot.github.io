@@ -1,5 +1,5 @@
 intro_blurb: |
-   I am a software architect (4 years) and full stack developer (7 years) with experience in application security as well as unit and integration testing.
+   I am a software architect (4 years) and full stack developer (8 years) with experience in application security as well as unit and integration testing.
    My wide range of skills with languages and tools allows for innovative solutions to new problems.
 
 #Any buzzword skills you want to include
@@ -44,12 +44,23 @@ skills:
  - Kubernetes
  - Blockchain
  - TRON
+ - DevOps
 
 #Work experience is required
 roles:
+ - title: Senior Software Developer
+   start: Jul 2019
+   end: Present
+   employer: PODS, Clearwater, FL
+   employer_description: Moving and Storage
+   description:
+    - Decouple legacy WCF based applications from Microsoft AX 2009 to enable smooth upgrade from Microsoft AX (C#)
+    - Track down source code for legacy applications for which exact source could not be identified (C#, Visual Basic)
+    - Refactor common code into Nuget packages published on Sonatype Nexus via Bitbucket pipelines (DevOps, C#)
+    - Automate integration tests with on-premise TFS 2017 (Powershell)
  - title: <span title="Awesome Software Developer">Senior Software Developer</span>
    start: Sep 2015
-   end: Present
+   end: Jul 2019
    employer: Applicant Insight / NoMoreForms, New Port Richey, FL
    employer_description: Background Investigation and Applicant Processing
    description:
@@ -140,10 +151,11 @@ education:
 training:
    courses:
     - title: "DEV541: SANS Secure Coding in Java/JEE: Developing Defensible Applications"
-      date: April 2019 (certification pending)
+      date: April 2019 (certified August 2019)
+      link: https://www.youracclaim.com/badges/a43861b3-8ff5-4dc3-9bae-d7af6ebe7a91/public_url
     - title: "DEV544: SANS Secure Coding in .NET: Developing Defensible Applications"
       date: April 2018 (certified August 2018)
-      link: https://www.youracclaim.com/badges/1a48c4c3-c033-4216-b298-5dc29ba61d5c/linked_in_profile
+      link: https://www.youracclaim.com/badges/1a48c4c3-c033-4216-b298-5dc29ba61d5c/public_url
     - title: SANS Core NetWars Experience
       date: April 2018
       link: https://www.sans.org/netwars/tournament
