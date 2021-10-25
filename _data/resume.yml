@@ -1,5 +1,5 @@
 intro_blurb: |
-   I am a software architect (4 years) and full stack developer (8 years) with experience in application security as well as unit and integration testing.
+   I am a software architect and full stack developer with over 10 years of experience in application security as well as unit and integration testing.
    My wide range of skills with languages and tools allows for innovative solutions to new problems.
 
 #Any buzzword skills you want to include
@@ -43,14 +43,43 @@ skills:
  - Docker
  - Kubernetes
  - Blockchain
+ - Ethereum
  - TRON
  - DevOps
+ - ARM Template
+ - AWS
+ - CloudFormation
+ - Solidity
+ - Truffle
+ - HardHat
 
 #Work experience is required
 roles:
+ - title: Senion Software Developer (Contractor)
+   start: Jan 2019
+   end: Present
+   employer: Baha'i National Center, Wilmette, IL
+   employer_description: Not-For-Profit Religious Organization
+   description: 
+    - Optimize REST services from controller to database via LINQ and EF Core
+    - Integrate MeetUp and Google Sheets with minimal impact to users (.NET Core, Kubernetes)
+    - Convert legacy pages from jQuery to React
+    - Consolidate source code repositories and CI/CD solutions
+    - Automate builds using Azure DevOps Build and Release Pipelines
+    - Integrate ARM templates to streamline deployments
+ - title: Senior Software Developer (Contractor)
+   start: Jun 2021
+   end: Present
+   employer: Flexsible, Tampa, IL
+   employer_description: Smart Contract Development Services
+   description: 
+    - Investigate Proof of Concept for Binance Smart Chain real time notifications
+    - Implement Smart Contracts using both Truffle and Hardhat (Solidity)
+    - Automate CI/CD using GitHub Actions and AWS CloudFormation
+    - Provide sample PHP for submitting signed token transfer requests to Ethereum
  - title: Senior Software Developer
    start: Jul 2019
-   end: Present
+   end: Jul 2021
    employer: PODS, Clearwater, FL
    employer_description: Moving and Storage
    description:
@@ -58,6 +87,8 @@ roles:
     - Track down source code for legacy applications for which exact source could not be identified (C#, Visual Basic)
     - Refactor common code into Nuget packages published on Sonatype Nexus via Bitbucket pipelines (DevOps, C#)
     - Automate integration tests with on-premise TFS 2017 (Powershell)
+    - Create templates for Azure DevOps pipeline automation
+    - Participate in PCI DSS gap remediation
  - title: <span title="Awesome Software Developer">Senior Software Developer</span>
    start: Sep 2015
    end: Jul 2019
@@ -76,7 +107,7 @@ roles:
     - Tweak legacy apps written with PowerBuilder in PowerScript
  - title: Software Architect (Part-Time)
    start: Jul 2015
-   end: Present
+   end: Jan 2019
    employer: Qualityze Inc., Tampa, FL
    employer_description: Qualityze Systems for Regulated Industries
    description:
@@ -88,17 +119,6 @@ roles:
     - Create method to perform VisualForce injection to increase flexibility of Salesforce managed package (VisualForce)
     - Diagnose slow pages in Salesforce and design method to reduce load time
     - Design deployment process around github and lack of automation in Salesforce
- - title: Software Developer (Contractor)
-   start: Jan 2019
-   end: Present
-   employer: Baha'i National Center, Wilmette, IL
-   employer_description: Not-For-Profit Religious Organization
-   description: 
-    - Optimize REST services from controller to database via LINQ and EF Core
-    - Integrate MeetUp and Google Sheets with minimal impact to users (.NET Core, Kubernetes)
-    - Convert legacy pages from jQuery to React
-    - Consolidate source code repositories and CI/CD solutions
-    - Automate builds using Azure DevOps Build and Release Pipelines
  - title: Software Developer (Contractor)
    start: Dec 2018
    end: Jan 2019
