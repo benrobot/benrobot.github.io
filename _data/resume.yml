@@ -10,7 +10,8 @@ skills:
  - Eclipse
  - InlelliJ IDEA
  - C#
- - .NET Core
+ - AspNetCore
+ - NSwag
  - JavaScript
  - TypeScript
  - Angular
@@ -52,6 +53,7 @@ skills:
  - Solidity
  - Truffle
  - HardHat
+ - Web3
 
 #Work experience is required
 roles:
