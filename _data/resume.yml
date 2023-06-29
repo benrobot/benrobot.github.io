@@ -19,6 +19,7 @@ skills:
  - Chef
  - Unit Testing
  - XUnit
+ - Playwright
  - Powershell
  - Pester
  - Ruby
@@ -63,8 +64,10 @@ roles:
    employer: Baha'i National Center, Wilmette, IL
    employer_description: Not-For-Profit Religious Organization
    description: 
+    - Design automatic API documentation from unit test execution
+    - Create SAML Identify Provider on existing authentication system
+    - Develop and maintain Azure Functions, ASP.NET Core/MVC and SOAP services (C#)
     - Optimize REST services from controller to database via LINQ and EF Core
-    - Integrate MeetUp and Google Sheets with minimal impact to users (.NET Core, Kubernetes)
     - Convert legacy pages from jQuery to React
     - Consolidate source code repositories and CI/CD solutions
     - Automate builds using Azure DevOps Build and Release Pipelines
