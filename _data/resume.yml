@@ -1,5 +1,5 @@
 intro_blurb: |
-   I am a software architect and full stack developer with over 10 years of experience in application security as well as unit and integration testing.
+   I am a software architect and full stack developer with over 10 years of experience in Web3/Ethereum development as well as unit and integration testing.
    My wide range of skills with languages and tools allows for innovative solutions to new problems.
 
 #Any buzzword skills you want to include
@@ -75,6 +75,9 @@ roles:
    employer: Flexsible, Tampa, IL
    employer_description: Smart Contract Development Services
    description: 
+    - Creat Smart Contract using Solidity and HardHat including automated unit tests
+    - Reduce gas by implementing cloning of Smart Contracts
+    - Troubleshoot Hyperledger FireFly dynamic creation of supernodes
     - Investigate Proof of Concept for Binance Smart Chain real time notifications
     - Implement Smart Contracts using both Truffle and Hardhat (Solidity)
     - Automate CI/CD using GitHub Actions and AWS CloudFormation
