@@ -58,7 +58,7 @@ skills:
 
 #Work experience is required
 roles:
- - title: Senion Software Developer (Contractor)
+ - title: Senior Software Developer (Contractor)
    start: Jan 2019
    end: Present
    employer: Baha'i National Center, Wilmette, IL
@@ -75,7 +75,7 @@ roles:
  - title: Senior Software Developer (Contractor)
    start: Jun 2021
    end: Present
-   employer: Flexsible, Tampa, IL
+   employer: Flexsible, Tampa, FL
    employer_description: Smart Contract Development Services
    description: 
     - Create Smart Contract using Solidity and HardHat including automated unit tests
