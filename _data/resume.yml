@@ -1,5 +1,5 @@
 intro_blurb: |
-   I am a software architect and full stack developer with over 10 years of experience. Specializing in Web3/Ethereum development as well as unit and integration testing.
+   I am a software architect and full stack developer with over 10 years of experience. Specializing in SOLID, clean code as well as unit and integration testing.
    My wide range of skills with languages and tools allows for innovative solutions to new problems.
 
 #Any buzzword skills you want to include
@@ -7,10 +7,10 @@ skills:
  - Java
  - Gradle
  - Groovy
- - Eclipse
  - InlelliJ IDEA
  - C#
  - AspNetCore
+ - Redis
  - NSwag
  - JavaScript
  - TypeScript
@@ -41,7 +41,7 @@ skills:
  - SQL
  - Selenium
  - VirtualBox
- - VMware Workstation
+ - VMware
  - Docker
  - Kubernetes
  - Blockchain
@@ -49,7 +49,8 @@ skills:
  - TRON
  - DevOps
  - ARM Template
- - AWS
+ - AWS/Azure
+ - App Insights
  - CloudFormation
  - Solidity
  - Truffle
@@ -67,11 +68,14 @@ roles:
     - Design automatic API documentation from unit test execution
     - Create SAML Identify Provider on existing authentication system
     - Develop and maintain Azure Functions, ASP.NET Core/MVC and SOAP services (C#)
+    - Encourage best practices (e.g. SOLID, clean code, etc) and use of DI for IoC in .NET
     - Optimize REST services from controller to database via LINQ and EF Core
-    - Convert legacy pages from jQuery to React
-    - Consolidate source code repositories and CI/CD solutions
+    - Convert UI pages from jQuery to React and JavaScript to TypeScript
+    - Consolidate source code repositories and CI/CD solutions for automated testing/linting
     - Automate builds using Azure DevOps Build and Release Pipelines
     - Integrate ARM templates to streamline deployments
+    - Alert and troubleshoot using Azure App Insights' KQL (Kusto Query Language)
+    - Update stored procedures (SQL Server) and write SQL unit tests to verify functionality
  - title: Senior Software Developer (Contractor)
    start: Jun 2021
    end: Present
@@ -83,7 +87,7 @@ roles:
     - Troubleshoot Hyperledger FireFly dynamic creation of supernodes
     - Investigate Proof of Concept for Binance Smart Chain real time notifications
     - Implement Smart Contracts using both Truffle and Hardhat (Solidity)
-    - Automate CI/CD using GitHub Actions and AWS CloudFormation
+    - Automate CI/CD using GitHub Actions and AWS CloudFormation for NodeJS apps
     - Provide sample PHP for submitting signed token transfer requests to Ethereum
  - title: Senior Software Developer
    start: Jul 2019
@@ -92,6 +96,7 @@ roles:
    employer_description: Moving and Storage
    description:
     - Decouple legacy WCF based applications from Microsoft AX 2009 to enable smooth upgrade from Microsoft AX (C#)
+    - Troubleshoot issues related to performance and caching (Redis)
     - Track down source code for legacy applications for which exact source could not be identified (C#, Visual Basic)
     - Refactor common code into Nuget packages published on Sonatype Nexus via Bitbucket pipelines (DevOps, C#)
     - Automate integration tests with on-premise TFS 2017 (Powershell)
@@ -123,7 +128,8 @@ roles:
     - Research managed package automation to scratch orgs (Salesforce DX, Ant)
     - Build Quality System as Salesforce managed package (Apex, VisualForce)
     - Architect and implement Salesforce managed package secure feature manager
-    - Implement PDF manipulation using Java running on Heroku uploading to various salesforce orgs (Java, PdfBox, Apex, cometD)
+    - Implement PDF manipulation using Java running on Heroku uploading to various salesforce orgs (Java, PdfBox, Apex)
+    - Notify using unobtrusive messages and Salesforce cometD (WebSocket) messaging
     - Create method to perform VisualForce injection to increase flexibility of Salesforce managed package (VisualForce)
     - Diagnose slow pages in Salesforce and design method to reduce load time
     - Design deployment process around github and lack of automation in Salesforce
