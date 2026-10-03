@@ -12,7 +12,54 @@
 				{% for link in site.primarylinks %}
 				<li><a target="_blank" rel="noopener noreferrer" href="{{ link.url }}">{{ link.title }}</a></li>
 				{% endfor %}
+				<li class="theme-toggle-item"><button type="button" class="theme-toggle" aria-pressed="false">Dark mode</button></li>
 			</ul>
 		</nav>
 	</div>
 </header>
+<script>
+	(function () {
+		var root = document.documentElement;
+		var button = document.querySelector(".theme-toggle");
+		if (!button) return;
+		var media = window.matchMedia("(prefers-color-scheme: dark)");
+
+		function chosen() {
+			return root.getAttribute("data-theme");
+		}
+
+		function appearance() {
+			var theme = chosen();
+			if (theme === "light" || theme === "dark") return theme;
+			return media.matches ? "dark" : "light";
+		}
+
+		function paint() {
+			var mode = appearance();
+			button.textContent = mode === "dark" ? "Light mode" : "Dark mode";
+			button.setAttribute("aria-pressed", mode === "dark" ? "true" : "false");
+		}
+
+		button.addEventListener("click", function () {
+			var next = appearance() === "dark" ? "light" : "dark";
+			root.setAttribute("data-theme", next);
+			try { localStorage.setItem("theme", next); } catch (e) {}
+			var meta = document.querySelector('meta[name="theme-color"][data-user-theme]');
+			if (!meta) {
+				meta = document.createElement("meta");
+				meta.setAttribute("name", "theme-color");
+				meta.setAttribute("data-user-theme", "");
+				document.head.appendChild(meta);
+			}
+			meta.setAttribute("content", next === "dark" ? "#0d1218" : "#17212b");
+			paint();
+		});
+
+		if (media.addEventListener) {
+			media.addEventListener("change", function () {
+				if (!chosen()) paint();
+			});
+		}
+		paint();
+	})();
+</script>

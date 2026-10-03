@@ -1,4 +1,14 @@
 <head>
+	<script>
+		(function () {
+			try {
+				var theme = localStorage.getItem("theme");
+				if (theme === "light" || theme === "dark") {
+					document.documentElement.setAttribute("data-theme", theme);
+				}
+			} catch (e) {}
+		})();
+	</script>
 	{% if site.ga_tracking_id %}
 	<!-- Global site tag (gtag.js) - Google Analytics -->
 	<script async src="https://www.googletagmanager.com/gtag/js?id={{ site.ga_tracking_id }}"></script>
@@ -24,7 +34,8 @@
 	<link rel="shortcut icon" href="{{ '/img/favicon.ico' | relative_url }}">
 	<meta name="msapplication-TileColor" content="#17212b">
 	<meta name="msapplication-config" content="{{ '/img/browserconfig.xml' | relative_url }}">
-	<meta name="theme-color" content="#17212b">
+	<meta name="theme-color" content="#17212b" media="(prefers-color-scheme: light)">
+	<meta name="theme-color" content="#0d1218" media="(prefers-color-scheme: dark)">
 
 	<link rel="stylesheet" type="text/css" href="{{ '/css/main_style.css' | relative_url }}">
 </head>
