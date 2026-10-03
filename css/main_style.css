@@ -346,14 +346,52 @@ main {
 	}
 }
 
+@page {
+	size: letter;
+	margin: 0.55in 0.65in 0.6in;
+}
+
 @media print {
 	:root {
 		--bg: #fff;
 		--surface: #fff;
+		--ink: #000;
+		--muted: #222;
+		--line: #bbb;
+		--accent: #000;
+		--header: #fff;
+		--header-text: #000;
+		--header-muted: #000;
+		--header-quiet: #222;
+		--link: #000;
+	}
+
+	*,
+	*::before,
+	*::after {
+		print-color-adjust: economy;
+		-webkit-print-color-adjust: economy;
+	}
+
+	html {
+		scroll-padding-top: 0;
+	}
+
+	body {
+		background: #fff;
+		color: #000;
+		font-size: 10.5pt;
+		line-height: 1.35;
+	}
+
+	a {
+		color: #000;
+		text-decoration: none;
 	}
 
 	.skip-link,
-	.site-nav {
+	.site-footer,
+	section:has(#stackoverflow-heading) {
 		display: none;
 	}
 
@@ -361,38 +399,195 @@ main {
 		position: static;
 		background: #fff;
 		color: #000;
-		border-bottom: 1px solid #000;
+		border-bottom: 1.25pt solid #000;
 	}
 
-	.identity-name,
-	.identity-role,
-	.identity-kicker {
+	.site-header-inner,
+	main {
+		width: auto;
+		max-width: none;
+		margin: 0;
+		padding: 0;
+	}
+
+	.site-header-inner {
+		display: block;
+		padding-bottom: 8pt;
+	}
+
+	.identity {
+		display: flex;
+		flex-direction: column;
+	}
+
+	.identity-name {
+		order: 1;
+		margin: 0;
+		font-size: 18pt;
+		line-height: 1.1;
+	}
+
+	.identity-name a {
 		color: #000;
 	}
 
-	body {
-		background: #fff;
+	.identity-role {
+		order: 2;
+		margin-top: 1pt;
+		color: #000;
 		font-size: 11pt;
 	}
 
-	main {
-		width: auto;
-		margin: 0.6rem 0 0;
+	.identity-kicker {
+		order: 3;
+		margin-top: 1pt;
+		color: #222;
+		font-size: 10pt;
+		letter-spacing: 0;
+	}
+
+	.site-nav ul {
+		display: block;
+		margin: 4pt 0 0;
+		padding: 0;
+	}
+
+	.site-nav li {
+		display: inline;
+	}
+
+	.site-nav li:not(:last-child)::after {
+		content: "   ";
+	}
+
+	.site-nav a {
+		color: #000;
+		font-size: 9pt;
+		overflow-wrap: anywhere;
+	}
+
+	.site-nav a::after {
+		content: ": " attr(href);
 	}
 
 	.panel {
+		background: transparent;
 		border: 0;
 		border-radius: 0;
-		padding: 0 0 0.4rem;
-		break-inside: auto;
+		padding: 0;
+		margin: 11pt 0 0;
 	}
 
-	.role {
-		break-inside: avoid;
-	}
-
-	a {
+	.panel h2 {
+		margin: 0 0 5pt;
+		padding-bottom: 1pt;
+		border-bottom: 0.75pt solid #000;
 		color: #000;
-		text-decoration: none;
+		font-size: 10.5pt;
+		letter-spacing: 0.04em;
+	}
+
+	.summary p {
+		margin: 0;
+	}
+
+	.skill-list {
+		display: block;
+		margin: 0;
+		padding: 0;
+	}
+
+	.skill-list li {
+		display: inline;
+		margin: 0;
+		padding: 0;
+		background: none;
+		border: 0;
+		border-radius: 0;
+		color: #000;
+		font-size: 10pt;
+		line-height: 1.45;
+	}
+
+	.skill-list li:not(:last-child)::after {
+		content: " · ";
+	}
+
+	.role-header {
+		display: grid;
+		grid-template-columns: minmax(0, 1fr) auto;
+		column-gap: 12pt;
+		align-items: start;
+	}
+
+	.role-title {
+		margin: 0;
+		font-size: 11pt;
+	}
+
+	.role-dates {
+		margin: 0;
+		color: #222;
+		font-size: 10pt;
+		white-space: nowrap;
+	}
+
+	.role-where {
+		margin: 0;
+		color: #222;
+		font-size: 10pt;
+	}
+
+	.role ul {
+		margin: 2pt 0 0;
+		padding-left: 1.15em;
+	}
+
+	.role li + li {
+		margin-top: 1pt;
+	}
+
+	.role + .role {
+		margin-top: 8pt;
+		padding-top: 7pt;
+		border-top: 0.4pt solid #ccc;
+	}
+
+	.facts li + li,
+	.course-list li + li {
+		margin-top: 5pt;
+	}
+
+	.facts span,
+	.course-list .course-date {
+		color: #222;
+	}
+
+	.course-list a {
+		font-weight: 600;
+	}
+
+	h2,
+	h3,
+	.role-header {
+		break-inside: avoid;
+		break-after: avoid;
+		page-break-inside: avoid;
+		page-break-after: avoid;
+	}
+
+	.summary,
+	#skillsBubble,
+	.role li,
+	.facts li,
+	.course-list li {
+		break-inside: avoid;
+		page-break-inside: avoid;
+	}
+
+	p,
+	li {
+		orphans: 2;
+		widows: 2;
 	}
 }
