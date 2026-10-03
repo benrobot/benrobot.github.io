@@ -1,0 +1,88 @@
+# Build the downloadable resume from _data/resume.yml.
+#
+# Runs when resume data, site config, the generator, or this workflow changes
+# on main. Pull requests do not regenerate the files.
+
+name: Resume files
+
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - "_data/resume.yml"
+      - "_config.yml"
+      - "scripts/generate_resume.py"
+      - ".github/workflows/resume-files.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: write
+  pages: write
+
+concurrency:
+  group: resume-files-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  generate:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
+
+      - name: Install Word and PDF tools
+        run: |
+          set -euo pipefail
+          sudo apt-get update
+          sudo apt-get install -y libreoffice-writer fonts-crosextra-carlito
+          mkdir -p "${HOME}/.config/fontconfig"
+          cat > "${HOME}/.config/fontconfig/fonts.conf" <<'EOF'
+          <?xml version="1.0"?>
+          <!DOCTYPE fontconfig SYSTEM "fonts.dtd">
+          <fontconfig>
+            <alias>
+              <family>Calibri</family>
+              <prefer><family>Carlito</family></prefer>
+            </alias>
+          </fontconfig>
+          EOF
+          fc-cache -f
+
+      - name: Generate the Word resume
+        run: |
+          set -euo pipefail
+          python3 -m pip install --user python-docx pyyaml
+          python3 scripts/generate_resume.py
+
+      - name: Generate the PDF
+        run: |
+          set -euo pipefail
+          soffice --headless --convert-to pdf --outdir . benjamin-roedell-resume.docx
+
+      - name: Commit generated files
+        env:
+          BRANCH: ${{ github.ref_name }}
+        run: |
+          set -euo pipefail
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add benjamin-roedell-resume.docx benjamin-roedell-resume.pdf
+          if git diff --cached --quiet; then
+            echo "Resume files are unchanged."
+            exit 0
+          fi
+          git commit -m "Generate resume PDF and Word files"
+          git push origin "HEAD:${BRANCH}"
+
+      - name: Request a GitHub Pages build
+        if: github.event_name == 'push' && github.ref == 'refs/heads/main'
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          set -euo pipefail
+          if gh api --method POST "repos/${GITHUB_REPOSITORY}/pages/builds" > /tmp/pages-build-request.json; then
+            echo "Requested a GitHub Pages build"
+          else
+            echo "Pages build request was not accepted; a build may already be in progress."
+          fi

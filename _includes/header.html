@@ -12,6 +12,8 @@
 				{% for link in site.primarylinks %}
 				<li><a target="_blank" rel="noopener noreferrer" href="{{ link.url }}">{{ link.title }}</a></li>
 				{% endfor %}
+				<li class="resume-download"><a href="{{ '/benjamin-roedell-resume.pdf' | relative_url }}">PDF</a></li>
+				<li class="resume-download"><a href="{{ '/benjamin-roedell-resume.docx' | relative_url }}">Word</a></li>
 				<li class="theme-toggle-item"><button type="button" class="theme-toggle" aria-pressed="false">Dark mode</button></li>
 			</ul>
 		</nav>
