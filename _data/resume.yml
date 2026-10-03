@@ -1,6 +1,6 @@
 intro_blurb: |
-   I am a software architect and full stack developer with over 10 years of experience. Specializing in SOLID, clean code as well as unit and integration testing.
-   My wide range of skills with languages and tools allows for innovative solutions to new problems.
+   I am a solution architect and full stack developer with over 10 years of experience. I work across application development, cloud infrastructure, and security, specializing in SOLID, clean code, and unit and integration testing.
+   I raise delivery quality through automation and advocate for simple, maintainable architecture.
 
 #Any buzzword skills you want to include
 skills:
@@ -56,9 +56,31 @@ skills:
  - Truffle
  - HardHat
  - Web3
+ - NestJS
+ - RabbitMQ
+ - MongoDB
+ - n8n
+ - Prismatic
+ - Snyk
+ - OAuth
 
 #Work experience is required
 roles:
+ - title: Solution Architect
+   start: Sep 2023
+   end: Present
+   employer: Mad Mobile, Tampa, FL
+   employer_description: Restaurant and Retail Software
+   description:
+    - Standardize build automation, Snyk security testing, unit and integration tests, code review, release versioning, and deployment automation across old and new applications
+    - Rewrite ShopCPQ in NestJS, replacing MongoDB queues with RabbitMQ and in-memory timers with Kubernetes jobs
+    - Make JSDoc type safety and unit test coverage standard for JSRunner implementation repositories
+    - Guide integration choices across n8n, Prismatic, and NestJS while supporting retail customers such as Knitwell Group and West Marine
+    - Carry OAuth research for Concierge through to an implementation decision, and steer Concierge toward faster client integration, including Concierge AI
+    - Move Neo toward reproducible builds and deployments
+    - Partner with the Cloud team on production ownership, with a clear split between prod and non-prod and explicit access controls
+    - Support Multi-Location Reporting, Enterprise Solutions, and products including CAKE, MenuPad, and Concierge
+    - Mentor retail engineers and advocate for simple, maintainable architecture in design decisions
  - title: Senior Software Developer (Contractor)
    start: Jan 2019
    end: Present
