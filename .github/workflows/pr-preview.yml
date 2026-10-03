@@ -1,0 +1,169 @@
+# Publish each pull request at https://benrobot.github.io/pr-preview/pr-<number>/
+#
+# This repository is a user site, so GitHub Pages only publishes the default
+# branch. The preview action commits the built site onto main under
+# pr-preview/pr-<number>/, and the legacy Pages build copies that directory
+# through as static files. Pushes made with GITHUB_TOKEN do not start that
+# build, so this workflow requests one after the commit.
+
+name: PR preview
+
+on:
+  pull_request:
+    types:
+      - opened
+      - reopened
+      - synchronize
+      - closed
+
+# Previews are committed onto main. Run one at a time so those pushes do not race.
+concurrency:
+  group: pr-preview
+  cancel-in-progress: false
+
+permissions:
+  contents: write
+  pull-requests: write
+  pages: write
+
+jobs:
+  deploy-preview:
+    if: github.event.pull_request.head.repo.full_name == github.repository
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
+
+      - name: Configure preview baseurl
+        if: github.event.action != 'closed'
+        env:
+          PR_NUMBER: ${{ github.event.number }}
+        run: |
+          set -euo pipefail
+          # Files already published on main must not be baked into this preview.
+          rm -rf pr-preview
+          cat >> _config.yml <<EOF
+
+          baseurl: "/pr-preview/pr-${PR_NUMBER}"
+          EOF
+
+      - name: Build site
+        if: github.event.action != 'closed'
+        uses: actions/jekyll-build-pages@44a6e6beabd48582f863aeeb6cb2151cc1716697 # v1
+
+      - name: Check preview build
+        if: github.event.action != 'closed'
+        env:
+          PR_NUMBER: ${{ github.event.number }}
+        run: |
+          set -euo pipefail
+          test -f _site/index.html
+          test -f _site/css/main_style.css
+          test -f _site/js/jquery.githubRepoWidget.custom.js
+          test -f _site/img/gray_jean.png
+          grep -q "/pr-preview/pr-${PR_NUMBER}/css/main_style.css" _site/index.html
+          grep -q "/pr-preview/pr-${PR_NUMBER}/js/jquery.githubRepoWidget.custom.js" _site/index.html
+          if [ -d _site/pr-preview ]; then
+            echo "Build included a nested pr-preview directory."
+            exit 1
+          fi
+
+      - name: Deploy preview
+        id: preview
+        uses: rossjrw/pr-preview-action@ffa7509e91a3ec8dfc2e5536c4d5c1acdf7a6de9 # v1
+        with:
+          source-dir: _site
+          preview-branch: main
+          umbrella-dir: pr-preview
+          pages-base-url: benrobot.github.io
+          comment: false
+          qr-code: false
+
+      - name: Rebuild GitHub Pages
+        if: steps.preview.outputs.deployment-action != 'none'
+        env:
+          GH_TOKEN: ${{ github.token }}
+          DEPLOYED_SHA: ${{ steps.preview.outputs.deployed-commit-sha }}
+        run: |
+          set -euo pipefail
+
+          if [ -n "${DEPLOYED_SHA}" ]; then
+            sha="${DEPLOYED_SHA}"
+          else
+            sha="$(gh api "repos/${GITHUB_REPOSITORY}/commits/main" --jq .sha)"
+          fi
+          echo "Waiting for GitHub Pages to publish ${sha}"
+
+          request_build() {
+            if gh api --method POST "repos/${GITHUB_REPOSITORY}/pages/builds" > /tmp/pages-build-request.json; then
+              echo "Requested a GitHub Pages build"
+            else
+              echo "Pages build request was not accepted; a build may already be in progress."
+            fi
+          }
+
+          request_build
+          seen_our_build=0
+          for attempt in $(seq 1 36); do
+            build_status="$(gh api "repos/${GITHUB_REPOSITORY}/pages/builds/latest" --jq .status)"
+            build_sha="$(gh api "repos/${GITHUB_REPOSITORY}/pages/builds/latest" --jq .commit)"
+            echo "attempt=${attempt} status=${build_status} commit=${build_sha}"
+            if [ "${build_sha}" = "${sha}" ] && [ "${build_status}" = "built" ]; then
+              exit 0
+            fi
+            if [ "${build_sha}" = "${sha}" ] && [ "${build_status}" = "errored" ]; then
+              gh api "repos/${GITHUB_REPOSITORY}/pages/builds/latest" --jq .error
+              exit 1
+            fi
+            if [ "${seen_our_build}" = "0" ] && [ "${build_sha}" = "${sha}" ]; then
+              seen_our_build=1
+            fi
+            if [ "${seen_our_build}" = "0" ] && { [ "${build_status}" = "built" ] || [ "${build_status}" = "errored" ]; }; then
+              if [ $((attempt % 3)) -eq 0 ]; then
+                request_build
+              fi
+            fi
+            sleep 10
+          done
+          echo "Timed out waiting for GitHub Pages to publish ${sha}"
+          exit 1
+
+      - name: Comment on the pull request
+        if: steps.preview.outputs.deployment-action != 'none'
+        env:
+          GH_TOKEN: ${{ github.token }}
+          PR_NUMBER: ${{ github.event.number }}
+          PREVIEW_URL: ${{ steps.preview.outputs.preview-url }}
+          DEPLOYMENT_ACTION: ${{ steps.preview.outputs.deployment-action }}
+        run: |
+          set -euo pipefail
+          marker="<!-- pr-preview -->"
+          if [ "${DEPLOYMENT_ACTION}" = "deploy" ]; then
+            if [ -z "${PREVIEW_URL}" ]; then
+              echo "Preview action did not return a URL."
+              exit 1
+            fi
+            body="$(printf '%s\n' \
+              "${marker}" \
+              "Preview of this pull request is published at <${PREVIEW_URL}>." \
+              "" \
+              "It updates when you push, and it is removed when the pull request is closed.")"
+          else
+            body="$(printf '%s\n' \
+              "${marker}" \
+              "Preview removed because this pull request was closed.")"
+          fi
+
+          comments_json="$(gh api "repos/${GITHUB_REPOSITORY}/issues/${PR_NUMBER}/comments?per_page=100")"
+          comment_id="$(printf '%s' "${comments_json}" | jq -r --arg marker "${marker}" '[.[] | select(.body | contains($marker)) | .id][0] // empty')"
+
+          if [ -n "${comment_id}" ]; then
+            gh api --method PATCH "repos/${GITHUB_REPOSITORY}/issues/comments/${comment_id}" \
+              -f body="${body}" > /dev/null
+          else
+            gh api --method POST "repos/${GITHUB_REPOSITORY}/issues/${PR_NUMBER}/comments" \
+              -f body="${body}" > /dev/null
+          fi
+
+          echo "### Preview" >> "${GITHUB_STEP_SUMMARY}"
+          echo "${body}" >> "${GITHUB_STEP_SUMMARY}"
