@@ -75,7 +75,7 @@ roles:
    employer_description: Not-For-Profit Religious Organization
    description: 
     - Design automatic API documentation from unit test execution
-    - Create SAML Identify Provider on existing authentication system
+    - Create SAML Identity Provider on existing authentication system
     - Develop and maintain Azure Functions, ASP.NET Core/MVC and SOAP services (C#)
     - Encourage best practices (e.g. SOLID, clean code, etc) and use of DI for IoC in .NET
     - Optimize REST services from controller to database via LINQ and EF Core
@@ -111,6 +111,12 @@ roles:
     - Automate integration tests with on-premise TFS 2017 (Powershell)
     - Create templates for Azure DevOps pipeline automation
     - Participate in PCI DSS gap remediation
+   # Word and PDF only. The site keeps every bullet in description.
+   download_description:
+    - Decouple legacy WCF based applications from Microsoft AX 2009 to enable smooth upgrade from Microsoft AX (C#)
+    - Troubleshoot issues related to performance and caching (Redis)
+    - Refactor common code into Nuget packages published on Sonatype Nexus via Bitbucket pipelines (DevOps, C#)
+    - Participate in PCI DSS gap remediation
  - title: <span title="Awesome Software Developer">Senior Software Developer</span>
    start: Sep 2015
    end: Jul 2019
@@ -127,6 +133,12 @@ roles:
     - Improve Java coding practices by implementing custom logging, unit testing, and static code analysis (slf4j, junit4, junit5, ErrorProne, SonarQube)
     - Create Gradle build scripts for legacy Java applications with custom tasks for local deployment, build versions, and packaging (Java, Gradle, Groovy)
     - Tweak legacy apps written with PowerBuilder in PowerScript
+   download_description:
+    - Debug and diagnose obscure race conditions in various environments (JavaScript, Java, SQL)
+    - Maintain and upgrade legacy Java based systems while launching new systems using .NET (C#, XUnit, Angular, TypeScript)
+    - Integrate credit card / ACH payment system to allow applicants to pre-pay client specified fees (Java, C#)
+    - Improve Java coding practices by implementing custom logging, unit testing, and static code analysis (slf4j, junit4, junit5, ErrorProne, SonarQube)
+    - Create Gradle build scripts for legacy Java applications with custom tasks for local deployment, build versions, and packaging (Java, Gradle, Groovy)
  - title: Software Architect (Part-Time)
    start: Jul 2015
    end: Jan 2019
@@ -142,6 +154,10 @@ roles:
     - Create method to perform VisualForce injection to increase flexibility of Salesforce managed package (VisualForce)
     - Diagnose slow pages in Salesforce and design method to reduce load time
     - Design deployment process around github and lack of automation in Salesforce
+   download_description:
+    - Build Quality System as Salesforce managed package (Apex, VisualForce)
+    - Implement PDF manipulation using Java running on Heroku uploading to various salesforce orgs (Java, PdfBox, Apex)
+    - Diagnose slow pages in Salesforce and design method to reduce load time
  - title: Software Developer (Contractor)
    start: Dec 2018
    end: Jan 2019
@@ -166,6 +182,11 @@ roles:
     - Coordinate and present training for software engineers on Automated Testing, Static Code Analysis, and Software Product Lines (Fitnesse, GoogleTest, Selenium)
     - Develop tool for converting Ant XML build instructions to Visual Studio format (C++)
     - Team lead for deployment and institutionalizing internally developed Software Production Line tool
+   download_description:
+    - Deploy and maintained central build automation within secured IT environment (Opscode Chef)
+    - Write Wireshark dissector for network communication with USMC Tactical Environment (Lua)
+    - Coordinate and present training for software engineers on Automated Testing, Static Code Analysis, and Software Product Lines (Fitnesse, GoogleTest, Selenium)
+    - Support multiple projects simultaneously; not the norm for recent hires (C++, C, Ada with Linux)
  - title: Quality Assurance and Regulatory Affairs Manager / Software Developer
    start: Dec 2003
    end: Jan 2013
@@ -183,6 +204,12 @@ roles:
     - Submit and receive 510(k) submissions to the FDA
     - Submit and receive medical license applications to Health Canada and EU notified body
     - Create and execute sterilization validation protocols for both Ethylene Oxide and Steam sterilizers
+   download_description:
+    - Perform both software and equipment validation on critical systems
+    - Develop and execute validation protocol for electronic signatures
+    - Submit and receive 510(k) submissions to the FDA
+    - Submit and receive medical license applications to Health Canada and EU notified body
+    - Create and execute sterilization validation protocols for both Ethylene Oxide and Steam sterilizers
 
 #Education is required
 education:
@@ -192,13 +219,16 @@ education:
    school: University of South Florida
 
 training:
+   # download: true includes that certificate on the Word and PDF resume.
    courses:
     - title: "DEV541: SANS Secure Coding in Java/JEE: Developing Defensible Applications"
       date: April 2019 (certified August 2019)
       link: https://www.youracclaim.com/badges/a43861b3-8ff5-4dc3-9bae-d7af6ebe7a91/public_url
+      download: true
     - title: "DEV544: SANS Secure Coding in .NET: Developing Defensible Applications"
       date: April 2018 (certified August 2018)
       link: https://www.youracclaim.com/badges/1a48c4c3-c033-4216-b298-5dc29ba61d5c/public_url
+      download: true
     - title: SANS Core NetWars Experience
       date: April 2018
       link: https://www.sans.org/netwars/tournament
@@ -225,3 +255,20 @@ additionalinfo: |
    <strong>TDD</strong>: I am a proponent of Test Driven Development. I have written tests in Java, C#, C++ Python, Ruby, JavaScript, and even Powershell and SQL. I developed and performed training in automated testing for over 100 developers.<br/><br/>
    <strong>Application Security</strong>: In addition to fixing various common sense vulnerabilities (like unauthenticated access and SQL injection) I have begun applying skills learned at various security related training courses.<br/><br/>
    <strong>Spoken Languages</strong>: Native English and Spanish speaker<br/><br/>
+
+# Word and PDF only. The site ignores this block.
+download:
+  headline: Software Architect and Engineer
+  links:
+   - title: benrobot.github.io
+     url: https://benrobot.github.io
+   - title: linkedin.com/in/benjaminroedell
+     url: https://www.linkedin.com/in/benjaminroedell
+   - title: github.com/benrobot
+     url: https://github.com/benrobot
+   - title: stackoverflow.com/users/3166133
+     url: https://stackoverflow.com/users/3166133/benrobot
+  highlights:
+   - Native English and Spanish speaker.
+   - Developed and performed training in automated testing for over 100 developers.
+   - Fixed vulnerabilities such as unauthenticated access and SQL injection, applying skills from security training.
