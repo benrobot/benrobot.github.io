@@ -16,23 +16,23 @@
 
 	<title>{{ site.title | escape }}</title>
 
-	<link rel="apple-touch-icon" sizes="180x180" href="/img/apple-touch-icon.png">
-	<link rel="icon" type="image/png" sizes="32x32" href="/img/favicon-32x32.png">
-	<link rel="icon" type="image/png" sizes="16x16" href="/img/favicon-16x16.png">
-	<link rel="manifest" href="/img/site.webmanifest">
-	<link rel="mask-icon" href="/img/safari-pinned-tab.svg" color="#5bbad5">
-	<link rel="shortcut icon" href="/img/favicon.ico">
+	<link rel="apple-touch-icon" sizes="180x180" href="{{ '/img/apple-touch-icon.png' | relative_url }}">
+	<link rel="icon" type="image/png" sizes="32x32" href="{{ '/img/favicon-32x32.png' | relative_url }}">
+	<link rel="icon" type="image/png" sizes="16x16" href="{{ '/img/favicon-16x16.png' | relative_url }}">
+	<link rel="manifest" href="{{ '/img/site.webmanifest' | relative_url }}">
+	<link rel="mask-icon" href="{{ '/img/safari-pinned-tab.svg' | relative_url }}" color="#5bbad5">
+	<link rel="shortcut icon" href="{{ '/img/favicon.ico' | relative_url }}">
 	<meta name="msapplication-TileColor" content="#00aba9">
-	<meta name="msapplication-config" content="/img/browserconfig.xml">
+	<meta name="msapplication-config" content="{{ '/img/browserconfig.xml' | relative_url }}">
 	<meta name="theme-color" content="#ffffff">
 
 	<!--  WebFonts  -->
-	<link href="./css/css" rel="stylesheet" type="text/css">
+	<link href="{{ '/css/css' | relative_url }}" rel="stylesheet" type="text/css">
 
 	<!-- Twitter Bootstrap CSS -->
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
 
 	<!-- Core StyleSheet -->
-	<link rel="stylesheet" type="text/css" href="./css/main_style.css">
-	<link rel="stylesheet" type="text/css" href="./css/bootstrap-override.css">
+	<link rel="stylesheet" type="text/css" href="{{ '/css/main_style.css' | relative_url }}">
+	<link rel="stylesheet" type="text/css" href="{{ '/css/bootstrap-override.css' | relative_url }}">
 </head>
