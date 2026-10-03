@@ -2,67 +2,54 @@ intro_blurb: |
    I am a solution architect and full stack developer with over 10 years of experience. I work across application development, cloud infrastructure, and security, specializing in SOLID, clean code, and unit and integration testing.
    I raise delivery quality through automation and advocate for simple, maintainable architecture.
 
-#Any buzzword skills you want to include
+# Shown on the site. To feature a parked group, move its items into this list.
 skills:
  - Java
  - Gradle
- - Groovy
- - InlelliJ IDEA
  - C#
  - AspNetCore
  - Redis
- - NSwag
  - JavaScript
  - TypeScript
  - Angular
  - React
- - Chef
- - Unit Testing
- - XUnit
  - Playwright
  - Powershell
- - Pester
- - Ruby
- - JUnit4
  - JUnit5
- - FitNesse
- - Google Test
- - Apex
- - VisualForce
- - Salesforce DX
- - Ant
- - PdfBox
- - CometD
- - C++
- - Ada
- - Wireshark
- - Lua
- - VBA
  - SQL
- - Selenium
- - VirtualBox
- - VMware
  - Docker
  - Kubernetes
- - Blockchain
- - Ethereum
- - TRON
- - DevOps
- - ARM Template
  - AWS/Azure
- - App Insights
  - CloudFormation
- - Solidity
- - Truffle
- - HardHat
- - Web3
  - NestJS
  - RabbitMQ
  - MongoDB
- - n8n
- - Prismatic
  - Snyk
  - OAuth
+
+# Not rendered. Move a group into skills to show it again.
+parked:
+  blockchain:
+   - Blockchain
+   - Ethereum
+   - TRON
+   - Solidity
+   - Truffle
+   - HardHat
+   - Web3
+  other:
+   - Groovy
+   - NSwag
+   - XUnit
+   - Pester
+   - Apex
+   - Salesforce DX
+   - C++
+   - Wireshark
+   - ARM Template
+   - App Insights
+   - n8n
+   - Prismatic
 
 #Work experience is required
 roles:
@@ -83,7 +70,7 @@ roles:
     - Mentor retail engineers and advocate for simple, maintainable architecture in design decisions
  - title: Senior Software Developer (Contractor)
    start: Jan 2019
-   end: Present
+   end: Present (Now Part-Time)
    employer: Baha'i National Center, Wilmette, IL
    employer_description: Not-For-Profit Religious Organization
    description: 
