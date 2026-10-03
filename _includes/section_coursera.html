@@ -1,26 +1,17 @@
 {% if site.data.resume.coursera %}
-	<div id="coursesBubble" class="rounded_panel txt_lightgrey">
-		<div class="top-rounded-panel grey-bg">
-			<h1>Coursera (<a target='_blank' href="{{site.data.resume.coursera.profileurl}}">view profile</a>)</h1>
-		</div>
-		<div class="content-rounded-panel">
-			<div id="courseraPanel">
-				{% for course in site.data.resume.coursera.courses %}
-				<div class="row">
-					{% if course.optionalimage %}
-						<div class="col-sm-5">
-							<img src="{{course.optionalimage}}">
-						</div>
-					{% endif %}
-					<div class="col-sm-6">
-						<a target='_blank' href="{{course.link}}">
-							{{course.title}}
-						</a><br/>
-						<i>{{course.date}}</i>
-					</div>
-				</div><br/>
-				{% endfor %}
-			</div>
-		</div>
-	</div>
+<section id="coursesBubble" class="panel" aria-labelledby="coursera-heading">
+	<h2 id="coursera-heading">Coursera {% if site.data.resume.coursera.profileurl %}(<a target="_blank" rel="noopener noreferrer" href="{{ site.data.resume.coursera.profileurl }}">view profile</a>){% endif %}</h2>
+	<ul class="course-list">
+		{% for course in site.data.resume.coursera.courses %}
+		<li>
+			{% if course.link %}
+			<a target="_blank" rel="noopener noreferrer" href="{{ course.link }}">{{ course.title }}</a>
+			{% else %}
+			<strong>{{ course.title }}</strong>
+			{% endif %}
+			<span class="course-date">{{ course.date }}</span>
+		</li>
+		{% endfor %}
+	</ul>
+</section>
 {% endif %}

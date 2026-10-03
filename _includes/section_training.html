@@ -1,21 +1,17 @@
 {% if site.data.resume.training %}
-	<div id="coursesBubble" class="rounded_panel txt_lightgrey">
-		<div class="top-rounded-panel grey-bg">
-			<h1>Training</h1>
-		</div>
-		<div class="content-rounded-panel">
-			<div id="trainingPanel">
-				{% for course in site.data.resume.training.courses %}
-				<div class="row">
-					<div class="col-sm-6">
-						<a target='_blank' href="{{course.link}}">
-							{{course.title}}
-						</a><br/>
-						<i>{{course.date}}</i>
-					</div>
-				</div><br/>
-				{% endfor %}
-			</div>
-		</div>
-	</div>
+<section id="coursesBubble" class="panel" aria-labelledby="training-heading">
+	<h2 id="training-heading">Training</h2>
+	<ul class="course-list">
+		{% for course in site.data.resume.training.courses %}
+		<li>
+			{% if course.link %}
+			<a target="_blank" rel="noopener noreferrer" href="{{ course.link }}">{{ course.title }}</a>
+			{% else %}
+			<strong>{{ course.title }}</strong>
+			{% endif %}
+			<span class="course-date">{{ course.date }}</span>
+		</li>
+		{% endfor %}
+	</ul>
+</section>
 {% endif %}

@@ -1,17 +1,19 @@
-<div class="rounded_panel txt_lightgrey">
-	<div class="top-rounded-panel grey-bg">
-		<h1>Work Experience</h1>
-	</div>
-	<div class="content-rounded-panel">
-		<div>
-					{% for role in site.data.resume.roles %}
-							<strong>{{role.title}}</strong> {{role.employer}} ({{role.employer_description}})<br/>
-							{{role.start}} - {{role.end}}<br/>
-							{% for item in role.description %}
-							- {{ item }}<br/>
-							{% endfor %}<br/>
-					{% endfor %}
-		</div>
-		<br>
-	</div>
-</div>
+<section class="panel" aria-labelledby="experience-heading">
+	<h2 id="experience-heading">Work Experience</h2>
+	<ol class="roles">
+		{% for role in site.data.resume.roles %}
+		<li class="role">
+			<header class="role-header">
+				<h3 class="role-title">{{ role.title }}</h3>
+				<p class="role-dates">{{ role.start }} – {{ role.end }}</p>
+				<p class="role-where">{{ role.employer }}<span class="role-kind">{{ role.employer_description }}</span></p>
+			</header>
+			<ul>
+				{% for item in role.description %}
+				<li>{{ item }}</li>
+				{% endfor %}
+			</ul>
+		</li>
+		{% endfor %}
+	</ol>
+</section>

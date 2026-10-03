@@ -1,26 +1,10 @@
 {% if site.data.resume.github %}
-	<div class="rounded_panel txt_lightgrey">
-		<div class="top-rounded-panel grey-bg">
-			<h1>Some projects I am Working On</h1>
-		</div>
-		<div class="content-rounded-panel" style="overflow: hidden;">
-			<div>
-				{% for project in site.data.resume.github %}
-					{% assign loopindex = forloop.index | modulo: 2 %}
-					{% if loopindex == 1 %}
-					<div class="row">
-					{% endif %}
-						<div class="col-lg-6">
-							<div class="github-widget" data-repo="{{project}}"></div>
-						</div>
-					{% if loopindex == 0 %}
-					</div>
-					{% endif %}
-				{% endfor %}
-				{% if loopindex == 1 %}
-					</div>
-				{% endif %}
-			</div>
-		</div>
+<section class="panel" aria-labelledby="projects-heading">
+	<h2 id="projects-heading">Projects</h2>
+	<div class="project-grid">
+		{% for project in site.data.resume.github %}
+		<div class="github-widget" data-repo="{{ project }}"></div>
+		{% endfor %}
 	</div>
+</section>
 {% endif %}
