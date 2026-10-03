@@ -446,7 +446,8 @@ main {
 
 	.skip-link,
 	.site-footer,
-	.theme-toggle-item,
+	.site-nav li.theme-toggle-item,
+	.site-nav li.resume-download,
 	section:has(#stackoverflow-heading) {
 		display: none;
 	}
