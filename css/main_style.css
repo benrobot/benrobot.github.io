@@ -10,10 +10,47 @@
 	--header-text: #f4f7fa;
 	--header-muted: #c5d0dc;
 	--header-quiet: #8ea0b3;
+	--header-border: #0e1620;
 	--link: #1f4b6e;
 	--measure: 52rem;
 	--space: 1.15rem;
 	color-scheme: light;
+}
+
+@media (prefers-color-scheme: dark) {
+	:root:not([data-theme="light"]) {
+		--bg: #12161c;
+		--surface: #1b222b;
+		--ink: #e8eef4;
+		--muted: #b4bec8;
+		--line: #313b48;
+		--accent: #9ec3e0;
+		--chip: #24303c;
+		--header: #0d1218;
+		--header-text: #f4f7fa;
+		--header-muted: #c5d0dc;
+		--header-quiet: #8ea0b3;
+		--header-border: #2a3542;
+		--link: #9ec3e0;
+		color-scheme: dark;
+	}
+}
+
+:root[data-theme="dark"] {
+	--bg: #12161c;
+	--surface: #1b222b;
+	--ink: #e8eef4;
+	--muted: #b4bec8;
+	--line: #313b48;
+	--accent: #9ec3e0;
+	--chip: #24303c;
+	--header: #0d1218;
+	--header-text: #f4f7fa;
+	--header-muted: #c5d0dc;
+	--header-quiet: #8ea0b3;
+	--header-border: #2a3542;
+	--link: #9ec3e0;
+	color-scheme: dark;
 }
 
 *,
@@ -60,7 +97,7 @@ a:hover {
 	left: 0.75rem;
 	top: -3rem;
 	z-index: 20;
-	background: #fff;
+	background: var(--surface);
 	color: var(--ink);
 	padding: 0.4rem 0.7rem;
 	text-decoration: none;
@@ -76,7 +113,7 @@ a:hover {
 	z-index: 5;
 	background: var(--header);
 	color: var(--header-text);
-	border-bottom: 1px solid #0e1620;
+	border-bottom: 1px solid var(--header-border);
 }
 
 .site-header-inner {
@@ -139,9 +176,23 @@ a:hover {
 	text-decoration: none;
 }
 
-.site-nav a:hover {
-	color: #fff;
+.site-nav a:hover,
+.theme-toggle:hover {
+	color: var(--header-text);
 	text-decoration: underline;
+}
+
+.theme-toggle {
+	margin: 0;
+	padding: 0;
+	border: 0;
+	background: none;
+	color: var(--header-muted);
+	font: inherit;
+	font-size: 0.92rem;
+	line-height: inherit;
+	cursor: pointer;
+	text-decoration: none;
 }
 
 main {
@@ -352,7 +403,9 @@ main {
 }
 
 @media print {
-	:root {
+	:root,
+	:root[data-theme="light"],
+	:root[data-theme="dark"] {
 		--bg: #fff;
 		--surface: #fff;
 		--ink: #000;
@@ -363,7 +416,9 @@ main {
 		--header-text: #000;
 		--header-muted: #000;
 		--header-quiet: #222;
+		--header-border: #000;
 		--link: #000;
+		color-scheme: light;
 	}
 
 	*,
@@ -391,6 +446,7 @@ main {
 
 	.skip-link,
 	.site-footer,
+	.theme-toggle-item,
 	section:has(#stackoverflow-heading) {
 		display: none;
 	}
