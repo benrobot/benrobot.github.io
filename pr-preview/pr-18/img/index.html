@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+	<script>
+		(function () {
+			try {
+				var theme = localStorage.getItem("theme");
+				if (theme === "light" || theme === "dark") {
+					document.documentElement.setAttribute("data-theme", theme);
+				}
+			} catch (e) {}
+		})();
+	</script>
+	
+	<!-- Google tag (gtag.js) -->
+	<script async src="https://www.googletagmanager.com/gtag/js?id=G-6FEK6V131F"></script>
+	<script>
+	  window.dataLayer = window.dataLayer || [];
+	  function gtag(){dataLayer.push(arguments);}
+	  gtag('js', new Date());
+
+	  gtag('config', 'G-6FEK6V131F');
+	</script>
+	
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta name="description" content="Benjamin Roedell, software architect and engineer in Tampa, FL. Application development, cloud infrastructure, security, and delivery automation.">
+
+	<title>Benjamin Roedell</title>
+
+	<link rel="apple-touch-icon" sizes="180x180" href="/pr-preview/pr-18/img/apple-touch-icon.png">
+	<link rel="icon" type="image/png" sizes="32x32" href="/pr-preview/pr-18/img/favicon-32x32.png">
+	<link rel="icon" type="image/png" sizes="16x16" href="/pr-preview/pr-18/img/favicon-16x16.png">
+	<link rel="manifest" href="/pr-preview/pr-18/img/site.webmanifest">
+	<link rel="mask-icon" href="/pr-preview/pr-18/img/safari-pinned-tab.svg" color="#1f4b6e">
+	<link rel="shortcut icon" href="/pr-preview/pr-18/img/favicon.ico">
+	<meta name="msapplication-TileColor" content="#17212b">
+	<meta name="msapplication-config" content="/pr-preview/pr-18/img/browserconfig.xml">
+	<meta name="theme-color" content="#17212b" media="(prefers-color-scheme: light)">
+	<meta name="theme-color" content="#0d1218" media="(prefers-color-scheme: dark)">
+
+	<link rel="stylesheet" type="text/css" href="/pr-preview/pr-18/css/main_style.css">
+</head>
+
+	<body>
+		<a class="skip-link" href="#content">Skip to content</a>
+<header class="site-header">
+	<div class="site-header-inner">
+		<div class="identity">
+			<p class="identity-kicker">Tampa, FL</p>
+			<h1 class="identity-name"><a href="#content">Benjamin Roedell</a></h1><p class="identity-role">Software Architect and Engineer</p>
+		</div>
+		<nav class="site-nav" aria-label="Profiles">
+			<ul>
+				
+				<li><a target="_blank" rel="noopener noreferrer" href="https://www.linkedin.com/in/benjaminroedell">LinkedIn</a></li>
+				
+				<li><a target="_blank" rel="noopener noreferrer" href="https://github.com/benrobot">GitHub</a></li>
+				
+				<li><a target="_blank" rel="noopener noreferrer" href="https://resume.github.io/?benrobot">GitHub summary</a></li>
+				
+				<li><a target="_blank" rel="noopener noreferrer" href="https://stackoverflow.com/users/3166133/benrobot">StackOverflow</a></li>
+				
+				<li class="resume-download"><a href="/pr-preview/pr-18/benjamin-roedell-resume.pdf">PDF</a></li>
+				<li class="resume-download"><a href="/pr-preview/pr-18/benjamin-roedell-resume.docx">Word</a></li>
+				<li class="theme-toggle-item"><button type="button" class="theme-toggle" aria-pressed="false">Dark mode</button></li>
+			</ul>
+		</nav>
+	</div>
+</header>
+<script>
+	(function () {
+		var root = document.documentElement;
+		var button = document.querySelector(".theme-toggle");
+		if (!button) return;
+		var media = window.matchMedia("(prefers-color-scheme: dark)");
+
+		function chosen() {
+			return root.getAttribute("data-theme");
+		}
+
+		function appearance() {
+			var theme = chosen();
+			if (theme === "light" || theme === "dark") return theme;
+			return media.matches ? "dark" : "light";
+		}
+
+		function paint() {
+			var mode = appearance();
+			button.textContent = mode === "dark" ? "Light mode" : "Dark mode";
+			button.setAttribute("aria-pressed", mode === "dark" ? "true" : "false");
+		}
+
+		button.addEventListener("click", function () {
+			var next = appearance() === "dark" ? "light" : "dark";
+			root.setAttribute("data-theme", next);
+			try { localStorage.setItem("theme", next); } catch (e) {}
+			var meta = document.querySelector('meta[name="theme-color"][data-user-theme]');
+			if (!meta) {
+				meta = document.createElement("meta");
+				meta.setAttribute("name", "theme-color");
+				meta.setAttribute("data-user-theme", "");
+				document.head.appendChild(meta);
+			}
+			meta.setAttribute("content", next === "dark" ? "#0d1218" : "#17212b");
+			paint();
+		});
+
+		if (media.addEventListener) {
+			media.addEventListener("change", function () {
+				if (!chosen()) paint();
+			});
+		}
+		paint();
+	})();
+</script>
+
+		<main id="content">
+			<h1 id="your-favicon-package">Your Favicon Package</h1>
+
+<p>This package was generated with <a href="https://realfavicongenerator.net/">RealFaviconGenerator</a> <a href="https://realfavicongenerator.net/change_log#v0.16">v0.16</a></p>
+
+<h2 id="install-instructions">Install instructions</h2>
+
+<p>To install this package:</p>
+
+<p>Extract this package in <code>&lt;web site&gt;&lt;?php echo /img/ ?&gt;</code>. If your site is <code>http://www.example.com</code>, you should be able to access a file named <code>http://www.example.com&lt;?php echo /img/ ?&gt;favicon.ico</code>.</p>
+
+<p>Insert the following code in the <code class="language-plaintext highlighter-rouge">head</code> section of your pages:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&lt;link rel="apple-touch-icon" sizes="180x180" href="/img/apple-touch-icon.png"&gt;
+&lt;link rel="icon" type="image/png" sizes="32x32" href="/img/favicon-32x32.png"&gt;
+&lt;link rel="icon" type="image/png" sizes="16x16" href="/img/favicon-16x16.png"&gt;
+&lt;link rel="manifest" href="/img/site.webmanifest"&gt;
+&lt;link rel="mask-icon" href="/img/safari-pinned-tab.svg" color="#5bbad5"&gt;
+&lt;link rel="shortcut icon" href="/img/favicon.ico"&gt;
+&lt;meta name="msapplication-TileColor" content="#00aba9"&gt;
+&lt;meta name="msapplication-config" content="/img/browserconfig.xml"&gt;
+&lt;meta name="theme-color" content="#ffffff"&gt;
+</code></pre></div></div>
+
+<p><em>Optional</em> - Check your favicon with the <a href="https://realfavicongenerator.net/favicon_checker">favicon checker</a></p>
+
+			<footer class="site-footer">
+	<p>Tampa, FL</p>
+	
+	<p><a target="_blank" rel="noopener noreferrer" href="https://twitter.com/BenjaminRoedell">@BenjaminRoedell</a></p>
+	
+</footer>
+
+		</main>
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+<script type="text/javascript" async="" src="/pr-preview/pr-18/js/jquery.githubRepoWidget.custom.js"></script>
+
+
+
+	</body>
+</html>
