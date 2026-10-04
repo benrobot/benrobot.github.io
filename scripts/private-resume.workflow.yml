@@ -46,8 +46,9 @@ jobs:
 
       - name: Generate the private resume
         env:
-          RESUME_EMAIL: ${{ secrets.RESUME_EMAIL }}
-          RESUME_PHONE: ${{ secrets.RESUME_PHONE }}
+          # Repository variables. This workflow runs only in the private repository.
+          RESUME_EMAIL: ${{ vars.RESUME_EMAIL }}
+          RESUME_PHONE: ${{ vars.RESUME_PHONE }}
         run: |
           set -euo pipefail
           python3 -m pip install --user python-docx pyyaml
