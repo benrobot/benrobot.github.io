@@ -67,7 +67,7 @@ roles:
     - Move Neo toward reproducible builds and deployments
     - Partner with the Cloud team on production ownership, with a clear split between prod and non-prod and explicit access controls
     - Support Multi-Location Reporting, Enterprise Solutions, and products including CAKE, MenuPad, and Concierge
-    - Mentor retail engineers and advocate for simple, maintainable architecture in design decisions
+    - Mentor 7 retail engineers and advocate for simple, maintainable architecture in design decisions
  - title: Senior Software Developer (Contractor)
    start: Jan 2019
    end: Present (part-time since Aug 2023)
