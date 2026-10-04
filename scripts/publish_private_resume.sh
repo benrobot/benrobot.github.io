@@ -41,6 +41,8 @@ rm -rf "${public_dir}"
 
 git config user.name "github-actions[bot]"
 git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+# Only these two canonical files are committed. Job-specific resumes under
+# applications/ are written by scripts/new_application.py and stay as they are.
 git add benjamin-roedell-resume-private.docx benjamin-roedell-resume-private.pdf
 if git diff --cached --quiet; then
   echo "Private resume files are unchanged."

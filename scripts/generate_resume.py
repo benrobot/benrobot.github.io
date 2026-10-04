@@ -425,6 +425,11 @@ def main():
         help="Untracked YAML file with email and phone. Omit this for the public resume.",
     )
     parser.add_argument("--docx", type=Path, help="Where to write the Word file.")
+    parser.add_argument(
+        "--resume",
+        type=Path,
+        help="Resume YAML file. Defaults to _data/resume.yml.",
+    )
     args = parser.parse_args()
 
     email, phone = contact_from(args.contact)
@@ -435,10 +440,19 @@ def main():
         output = Path.cwd() / PRIVATE_NAME
     else:
         output = ROOT / PUBLIC_NAME
-    if private and output.name == PUBLIC_NAME:
+    resolved = output.resolve()
+    inside_public = resolved == ROOT.resolve() or ROOT.resolve() in resolved.parents
+    if private and inside_public and resolved.name == PUBLIC_NAME:
         raise SystemExit("Refusing to write contact details into the public resume file.")
 
-    resume = load_yaml(ROOT / "_data" / "resume.yml")
+    if args.resume:
+        resume_path = args.resume if args.resume.is_absolute() else Path.cwd() / args.resume
+    else:
+        resume_path = ROOT / "_data" / "resume.yml"
+    if not resume_path.is_file():
+        raise SystemExit(f"Resume file not found: {resume_path}")
+
+    resume = load_yaml(resume_path)
     config = load_yaml(ROOT / "_config.yml")
     document = build(resume, config, email, phone)
     output.parent.mkdir(parents=True, exist_ok=True)
