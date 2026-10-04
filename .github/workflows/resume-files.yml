@@ -85,7 +85,7 @@ jobs:
             echo "Private resume dispatch token is not set."
             exit 0
           fi
-          gh api --method POST repos/benrobot/resume-private/dispatches -f event_type=resume-updated
+          gh api --method POST repos/benrobot/benrobot.github.io.private/dispatches -f event_type=resume-updated
 
       - name: Request a GitHub Pages build
         if: github.event_name == 'push' && github.ref == 'refs/heads/main'
