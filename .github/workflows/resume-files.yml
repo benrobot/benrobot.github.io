@@ -1,13 +1,11 @@
 # Build the downloadable resume from _data/resume.yml.
 #
-# Temporary: pull_request is enabled so this pull request can preview the
-# generated PDF and Word files. Remove the pull_request trigger before merge.
-# After that, the files are regenerated only when main changes.
+# Runs when resume data, site config, the generator, or this workflow changes
+# on main. Pull requests do not regenerate the files.
 
 name: Resume files
 
 on:
-  pull_request:
   push:
     branches:
       - main
@@ -23,18 +21,15 @@ permissions:
   pages: write
 
 concurrency:
-  group: resume-files-${{ github.event.pull_request.number || github.ref }}
+  group: resume-files-${{ github.ref }}
   cancel-in-progress: true
 
 jobs:
   generate:
-    if: github.event_name != 'pull_request' || github.event.pull_request.head.repo.full_name == github.repository
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
         uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
-        with:
-          ref: ${{ github.event_name == 'pull_request' && github.head_ref || github.ref_name }}
 
       - name: Install Word and PDF tools
         run: |
@@ -67,7 +62,7 @@ jobs:
 
       - name: Commit generated files
         env:
-          BRANCH: ${{ github.event_name == 'pull_request' && github.head_ref || github.ref_name }}
+          BRANCH: ${{ github.ref_name }}
         run: |
           set -euo pipefail
           git config user.name "github-actions[bot]"
