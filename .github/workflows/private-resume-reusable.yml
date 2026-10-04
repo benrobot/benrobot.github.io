@@ -1,0 +1,32 @@
+# Called by benrobot/benrobot.github.io.private. It does not run on its own.
+# vars.RESUME_EMAIL and vars.RESUME_PHONE come from the private repository.
+
+name: Private resume build
+
+on:
+  workflow_call:
+
+permissions:
+  contents: write
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout the private repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 50
+
+      - name: Checkout the public resume
+        uses: actions/checkout@v4
+        with:
+          repository: ${{ job.workflow_repository }}
+          ref: ${{ job.workflow_sha }}
+          path: public-site
+
+      - name: Publish the private resume
+        env:
+          RESUME_EMAIL: ${{ vars.RESUME_EMAIL }}
+          RESUME_PHONE: ${{ vars.RESUME_PHONE }}
+        run: bash public-site/scripts/publish_private_resume.sh
