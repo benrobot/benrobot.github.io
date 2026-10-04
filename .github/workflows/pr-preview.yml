@@ -32,7 +32,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
-        uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
+        uses: actions/checkout@v4
 
       - name: Configure preview baseurl
         if: github.event.action != 'closed'
@@ -49,7 +49,7 @@ jobs:
 
       - name: Build site
         if: github.event.action != 'closed'
-        uses: actions/jekyll-build-pages@44a6e6beabd48582f863aeeb6cb2151cc1716697 # v1
+        uses: actions/jekyll-build-pages@v1
 
       - name: Check preview build
         if: github.event.action != 'closed'
