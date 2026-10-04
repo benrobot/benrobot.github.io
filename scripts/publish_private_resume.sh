@@ -35,15 +35,16 @@ fc-cache -f
 
 python3 -m pip install --user python-docx pyyaml
 python3 "${public_dir}/scripts/generate_resume.py" \
-  --docx benjamin-roedell-resume-private.docx
-soffice --headless --convert-to pdf --outdir . benjamin-roedell-resume-private.docx
+  --docx benjamin-roedell-resume.docx
+soffice --headless --convert-to pdf --outdir . benjamin-roedell-resume.docx
 rm -rf "${public_dir}"
 
 git config user.name "github-actions[bot]"
 git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
 # Only these two canonical files are committed. Job-specific resumes under
 # applications/ are written by scripts/new_application.py and stay as they are.
-git add benjamin-roedell-resume-private.docx benjamin-roedell-resume-private.pdf
+git add benjamin-roedell-resume.docx benjamin-roedell-resume.pdf
+git rm -f --ignore-unmatch benjamin-roedell-resume-private.docx benjamin-roedell-resume-private.pdf
 if git diff --cached --quiet; then
   echo "Private resume files are unchanged."
   exit 0

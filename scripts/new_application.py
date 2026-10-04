@@ -16,6 +16,8 @@ from pathlib import Path
 
 import yaml
 
+from resume_diff import write_resume_diff
+
 ROOT = Path(__file__).resolve().parents[1]
 GENERATOR = ROOT / "scripts" / "generate_resume.py"
 DOCX_NAME = "benjamin-roedell-resume.docx"
@@ -78,6 +80,7 @@ def write_notes(folder, company, role, url, when, commit):
         "- Applied:\n"
         "- Contact:\n"
         f"- Source commit: {commit}\n"
+        "- Changes: resume.diff\n"
         "\n"
         "## Log\n"
         f"- {when}: Resume customized.\n"
@@ -184,8 +187,10 @@ def main():
 
     folder.mkdir(parents=True)
     (folder / "resume.yml").write_text(resume_src.read_text(encoding="utf-8"), encoding="utf-8")
+    commit = source_commit()
     write_posting(folder, posting, args.url.strip())
-    write_notes(folder, args.company.strip(), args.role.strip(), args.url.strip(), args.date, source_commit())
+    write_notes(folder, args.company.strip(), args.role.strip(), args.url.strip(), args.date, commit)
+    write_resume_diff(folder, commit)
     build_files(folder, contact)
 
     company = args.company.replace("|", "/")
