@@ -7,7 +7,7 @@ from pathlib import Path
 
 import yaml
 from docx import Document
-from docx.enum.text import WD_ALIGN_PARAGRAPH, WD_LINE_SPACING
+from docx.enum.text import WD_LINE_SPACING, WD_TAB_ALIGNMENT
 from docx.oxml import OxmlElement
 from docx.oxml.ns import qn
 from docx.shared import Inches, Pt, RGBColor
@@ -106,24 +106,9 @@ def add_hyperlink(paragraph, text, url, size):
     paragraph._p.append(hyperlink)
 
 
-def shade_off(table):
-    borders = OxmlElement("w:tblBorders")
-    for edge in ("top", "left", "bottom", "right", "insideH", "insideV"):
-        element = OxmlElement(f"w:{edge}")
-        element.set(qn("w:val"), "nil")
-        borders.append(element)
-    table._tbl.tblPr.append(borders)
-    table.autofit = False
-    widths = (Inches(5.35), Inches(1.75))
-    for cell, width in zip(table.rows[0].cells, widths):
-        cell.width = width
-        for paragraph in cell.paragraphs:
-            style_paragraph(paragraph)
-
-
 def add_heading(doc, text):
     paragraph = doc.add_paragraph()
-    style_paragraph(paragraph, before=12, after=2)
+    style_paragraph(paragraph, before=8, after=1)
     add_text(paragraph, text.upper(), 11, bold=True)
     p_pr = paragraph._p.get_or_add_pPr()
     borders = OxmlElement("w:pBdr")
@@ -146,27 +131,45 @@ def add_body(doc, text, before=0, after=2):
 
 def add_bullet(doc, text):
     paragraph = doc.add_paragraph(style="List Bullet")
-    style_paragraph(paragraph, before=0, after=1)
-    add_text(paragraph, text, 11)
+    style_paragraph(paragraph, before=0, after=0)
+    add_text(paragraph, text, 10.5)
+    return paragraph
+
+
+def text_inches(text, size):
+    return len(text) * (size * 0.5) / 72
+
+
+def add_dated_line(doc, left, dates, size, bold, before=0, after=0):
+    paragraph = doc.add_paragraph()
+    style_paragraph(paragraph, before=before, after=after)
+    paragraph.paragraph_format.tab_stops.add_tab_stop(Inches(7.2), WD_TAB_ALIGNMENT.RIGHT)
+    add_text(paragraph, left, size, bold=bold)
+    if dates:
+        separator = "\t" if text_inches(left, size) + 0.25 + text_inches(dates, size) <= 7.2 else "  "
+        add_text(paragraph, f"{separator}{dates}", size)
     return paragraph
 
 
 def add_role(doc, role):
-    table = doc.add_table(rows=1, cols=2)
-    shade_off(table)
-    left, right = table.rows[0].cells
-    left_p = left.paragraphs[0]
-    add_text(left_p, strip_tags(role.get("title")), 11, bold=True)
-    right_p = right.paragraphs[0]
-    right_p.alignment = WD_ALIGN_PARAGRAPH.RIGHT
-    dates = f"{role.get('start', '')} – {role.get('end', '')}"
-    add_text(right_p, dates, 11)
-    where = doc.add_paragraph()
-    style_paragraph(where, before=0, after=2)
+    title = strip_tags(role.get("title"))
     employer = role.get("employer", "")
     kind = role.get("employer_description", "")
-    add_text(where, f"{employer} · {kind}" if kind else employer, 10.5)
-    for item in role.get("description") or []:
+    dates = f"{role.get('start', '')} – {role.get('end', '')}"
+    left = f"{title}, {employer}"
+    where = f"{employer} · {kind}" if kind else employer
+    if text_inches(left, 11) + 0.25 + text_inches(dates, 11) <= 7.2:
+        add_dated_line(doc, left, dates, 11, True, before=3)
+        if kind:
+            add_dated_line(doc, kind, "", 10.5, False)
+    elif text_inches(title, 11) + 0.25 + text_inches(dates, 11) <= 7.2:
+        add_dated_line(doc, title, dates, 11, True, before=3)
+        add_dated_line(doc, where, "", 10.5, False)
+    else:
+        add_dated_line(doc, title, "", 11, True, before=3)
+        add_dated_line(doc, where, dates, 10.5, False)
+    bullets = role.get("download_description") or role.get("description") or []
+    for item in bullets:
         add_bullet(doc, strip_tags(item))
 
 
@@ -175,10 +178,10 @@ def build(resume, config):
     section = doc.sections[0]
     section.page_width = Inches(8.5)
     section.page_height = Inches(11)
-    section.top_margin = Inches(0.6)
-    section.bottom_margin = Inches(0.55)
-    section.left_margin = Inches(0.7)
-    section.right_margin = Inches(0.7)
+    section.top_margin = Inches(0.5)
+    section.bottom_margin = Inches(0.45)
+    section.left_margin = Inches(0.65)
+    section.right_margin = Inches(0.65)
     section.header_distance = Inches(0.3)
     section.footer_distance = Inches(0.3)
 
@@ -193,10 +196,14 @@ def build(resume, config):
     style_paragraph(name, after=0)
     add_text(name, config.get("name") or config.get("title") or "", 20, bold=True)
 
-    current = (resume.get("roles") or [{}])[0]
+    download = resume.get("download") or {}
+    headline = download.get("headline")
+    if not headline:
+        current = (resume.get("roles") or [{}])[0]
+        headline = strip_tags(current.get("title"))
     role_line = doc.add_paragraph()
     style_paragraph(role_line, after=0)
-    add_text(role_line, strip_tags(current.get("title")), 12)
+    add_text(role_line, headline, 12)
 
     location = doc.add_paragraph()
     style_paragraph(location, after=1)
@@ -204,8 +211,8 @@ def build(resume, config):
 
     links = doc.add_paragraph()
     style_paragraph(links, after=2)
-    items = list(config.get("primarylinks") or [])
-    if config.get("twitter_username"):
+    items = list(download.get("links") or config.get("primarylinks") or [])
+    if not download.get("links") and config.get("twitter_username"):
         items.append(
             {
                 "title": f"@{config['twitter_username']}",
@@ -222,6 +229,38 @@ def build(resume, config):
         line = line.strip()
         if line:
             add_body(doc, line)
+    for line in download.get("highlights") or []:
+        line = str(line).strip()
+        if line:
+            add_body(doc, line)
+
+    courses = (resume.get("training") or {}).get("courses") or []
+    selected_courses = [course for course in courses if course.get("download")]
+    if selected_courses:
+        add_heading(doc, "Certifications")
+        for course in selected_courses:
+            paragraph = doc.add_paragraph()
+            style_paragraph(paragraph, before=1, after=1)
+            title = course.get("title", "")
+            if course.get("link"):
+                add_hyperlink(paragraph, title, course["link"], 11)
+            else:
+                add_text(paragraph, title, 11, bold=True)
+            if course.get("date"):
+                add_text(paragraph, f"  {course['date']}", 10.5)
+    elif courses:
+        add_heading(doc, "Training")
+        for course in courses:
+            paragraph = doc.add_paragraph()
+            style_paragraph(paragraph, after=0)
+            title = course.get("title", "")
+            if course.get("link"):
+                add_hyperlink(paragraph, title, course["link"], 11)
+            else:
+                add_text(paragraph, title, 11, bold=True)
+            date = doc.add_paragraph()
+            style_paragraph(date, after=3)
+            add_text(date, str(course.get("date", "")), 10.5)
 
     skills = resume.get("skills") or []
     if skills:
@@ -245,23 +284,8 @@ def build(resume, config):
             style_paragraph(detail, after=2)
             add_text(detail, f"{item.get('school', '')} · {item.get('date', '')}", 11)
 
-    courses = (resume.get("training") or {}).get("courses") or []
-    if courses:
-        add_heading(doc, "Training")
-        for course in courses:
-            paragraph = doc.add_paragraph()
-            style_paragraph(paragraph, after=0)
-            title = course.get("title", "")
-            if course.get("link"):
-                add_hyperlink(paragraph, title, course["link"], 11)
-            else:
-                add_text(paragraph, title, 11, bold=True)
-            date = doc.add_paragraph()
-            style_paragraph(date, after=3)
-            add_text(date, str(course.get("date", "")), 10.5)
-
     extra = resume.get("additionalinfo")
-    if extra:
+    if extra and not download.get("highlights"):
         add_heading(doc, "Additional Information")
         for label, body in html_blocks(extra):
             paragraph = doc.add_paragraph()
