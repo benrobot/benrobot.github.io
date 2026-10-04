@@ -1,6 +1,12 @@
 #!/usr/bin/env python3
-"""Build benjamin-roedell-resume.docx from the site's resume data."""
+"""Build benjamin-roedell-resume.docx from the site's resume data.
 
+Email and phone are optional and must come from outside this repository.
+Without them, the public resume is unchanged.
+"""
+
+import argparse
+import os
 import re
 from html import unescape
 from pathlib import Path
@@ -173,13 +179,42 @@ def add_role(doc, role):
         add_bullet(doc, strip_tags(item))
 
 
-def build(resume, config):
+def add_contact(doc, email, phone):
+    if not email and not phone:
+        return
+    paragraph = doc.add_paragraph()
+    style_paragraph(paragraph, before=0, after=1)
+    if email:
+        add_hyperlink(paragraph, email, f"mailto:{email}", 11)
+    if email and phone:
+        add_text(paragraph, " · ", 11)
+    if phone:
+        add_text(paragraph, phone, 11)
+
+
+def contact_from(path):
+    contact = {}
+    if path:
+        loaded = load_yaml(path) or {}
+        if not isinstance(loaded, dict):
+            raise SystemExit(f"{path} must contain email and phone fields.")
+        contact.update(loaded)
+    if os.environ.get("RESUME_EMAIL"):
+        contact["email"] = os.environ["RESUME_EMAIL"]
+    if os.environ.get("RESUME_PHONE"):
+        contact["phone"] = os.environ["RESUME_PHONE"]
+    email = str(contact.get("email") or "").strip()
+    phone = str(contact.get("phone") or "").strip()
+    return email, phone
+
+
+def build(resume, config, email="", phone=""):
     doc = Document()
     section = doc.sections[0]
     section.page_width = Inches(8.5)
     section.page_height = Inches(11)
     section.top_margin = Inches(0.5)
-    section.bottom_margin = Inches(0.45)
+    section.bottom_margin = Inches(0.32 if email or phone else 0.45)
     section.left_margin = Inches(0.65)
     section.right_margin = Inches(0.65)
     section.header_distance = Inches(0.3)
@@ -208,6 +243,8 @@ def build(resume, config):
     location = doc.add_paragraph()
     style_paragraph(location, after=1)
     add_text(location, config.get("location", ""), 11)
+
+    add_contact(doc, email, phone)
 
     links = doc.add_paragraph()
     style_paragraph(links, after=2)
@@ -300,11 +337,35 @@ def build(resume, config):
     return doc
 
 
+PUBLIC_NAME = "benjamin-roedell-resume.docx"
+PRIVATE_NAME = "benjamin-roedell-resume-private.docx"
+
+
 def main():
+    parser = argparse.ArgumentParser(description="Build a resume docx from the site data.")
+    parser.add_argument(
+        "--contact",
+        type=Path,
+        help="Untracked YAML file with email and phone. Omit this for the public resume.",
+    )
+    parser.add_argument("--docx", type=Path, help="Where to write the Word file.")
+    args = parser.parse_args()
+
+    email, phone = contact_from(args.contact)
+    private = bool(email or phone)
+    if args.docx:
+        output = args.docx if args.docx.is_absolute() else Path.cwd() / args.docx
+    elif private:
+        output = Path.cwd() / PRIVATE_NAME
+    else:
+        output = ROOT / PUBLIC_NAME
+    if private and output.name == PUBLIC_NAME:
+        raise SystemExit("Refusing to write contact details into the public resume file.")
+
     resume = load_yaml(ROOT / "_data" / "resume.yml")
     config = load_yaml(ROOT / "_config.yml")
-    document = build(resume, config)
-    output = ROOT / "benjamin-roedell-resume.docx"
+    document = build(resume, config, email, phone)
+    output.parent.mkdir(parents=True, exist_ok=True)
     document.save(output)
     print(output)
 
