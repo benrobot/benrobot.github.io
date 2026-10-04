@@ -179,16 +179,14 @@ def add_role(doc, role):
         add_bullet(doc, strip_tags(item))
 
 
-def add_contact(doc, email, phone):
+def add_contact(paragraph, email, phone):
     if not email and not phone:
         return
-    paragraph = doc.add_paragraph()
-    style_paragraph(paragraph, before=0, after=1)
     if email:
-        add_hyperlink(paragraph, email, f"mailto:{email}", 11)
-    if email and phone:
         add_text(paragraph, " · ", 11)
+        add_hyperlink(paragraph, email, f"mailto:{email}", 11)
     if phone:
+        add_text(paragraph, " · ", 11)
         add_text(paragraph, phone, 11)
 
 
@@ -214,7 +212,7 @@ def build(resume, config, email="", phone=""):
     section.page_width = Inches(8.5)
     section.page_height = Inches(11)
     section.top_margin = Inches(0.5)
-    section.bottom_margin = Inches(0.32 if email or phone else 0.45)
+    section.bottom_margin = Inches(0.45)
     section.left_margin = Inches(0.65)
     section.right_margin = Inches(0.65)
     section.header_distance = Inches(0.3)
@@ -243,8 +241,7 @@ def build(resume, config, email="", phone=""):
     location = doc.add_paragraph()
     style_paragraph(location, after=1)
     add_text(location, config.get("location", ""), 11)
-
-    add_contact(doc, email, phone)
+    add_contact(location, email, phone)
 
     links = doc.add_paragraph()
     style_paragraph(links, after=2)
