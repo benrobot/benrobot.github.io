@@ -8,4 +8,4 @@ if [ ! -f private/contact.yml ]; then
   exit 1
 fi
 python3 scripts/generate_resume.py --contact private/contact.yml
-soffice --headless --convert-to pdf --outdir . benjamin-roedell-resume-private.docx
+soffice --headless --convert-to pdf --outdir private private/benjamin-roedell-resume.docx

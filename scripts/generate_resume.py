@@ -414,7 +414,6 @@ def build(resume, config, email="", phone=""):
 
 
 PUBLIC_NAME = "benjamin-roedell-resume.docx"
-PRIVATE_NAME = "benjamin-roedell-resume-private.docx"
 
 
 def main():
@@ -437,13 +436,24 @@ def main():
     if args.docx:
         output = args.docx if args.docx.is_absolute() else Path.cwd() / args.docx
     elif private:
-        output = Path.cwd() / PRIVATE_NAME
+        cwd = Path.cwd().resolve()
+        root = ROOT.resolve()
+        if cwd == root or root in cwd.parents:
+            output = ROOT / "private" / PUBLIC_NAME
+        else:
+            output = Path.cwd() / PUBLIC_NAME
     else:
         output = ROOT / PUBLIC_NAME
     resolved = output.resolve()
-    inside_public = resolved == ROOT.resolve() or ROOT.resolve() in resolved.parents
-    if private and inside_public and resolved.name == PUBLIC_NAME:
-        raise SystemExit("Refusing to write contact details into the public resume file.")
+    root = ROOT.resolve()
+    inside_public = resolved == root or root in resolved.parents
+    private_dir = (ROOT / "private").resolve()
+    under_private_dir = resolved == private_dir or private_dir in resolved.parents
+    if private and inside_public and not under_private_dir:
+        raise SystemExit(
+            "Refusing to write contact details into the public repository. "
+            "They belong under private/ or in a checkout of the private repository."
+        )
 
     if args.resume:
         resume_path = args.resume if args.resume.is_absolute() else Path.cwd() / args.resume
