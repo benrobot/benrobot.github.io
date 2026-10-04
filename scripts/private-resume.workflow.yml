@@ -18,6 +18,8 @@ jobs:
     steps:
       - name: Checkout this private repository
         uses: actions/checkout@v4
+        with:
+          fetch-depth: 50
 
       - name: Checkout the public resume
         uses: actions/checkout@v4
@@ -68,4 +70,18 @@ jobs:
             exit 0
           fi
           git commit -m "Update the private resume"
-          git push
+          branch="$(git branch --show-current)"
+          for attempt in 1 2 3 4 5; do
+            if git push origin "HEAD:${branch}"; then
+              exit 0
+            fi
+            echo "Push was rejected. Rebasing onto the latest ${branch}."
+            git fetch --depth=50 origin "${branch}"
+            if ! git rebase "origin/${branch}"; then
+              git rebase --abort
+              echo "Could not rebase the private resume commit."
+              exit 1
+            fi
+          done
+          echo "Could not push the private resume commit."
+          exit 1
