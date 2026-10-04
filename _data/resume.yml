@@ -1,6 +1,6 @@
 intro_blurb: |
    I am a software architect and engineer. I work across application development, cloud infrastructure, and security, specializing in SOLID, clean code, and unit and integration testing.
-   I raise delivery quality through automation and advocate for simple, maintainable architecture. I promote AI tools and services that improve products and productivity, and I keep the coding and delivery practices that make those tools effective.
+   I raise delivery quality through automation and advocate for simple, maintainable architecture. I promote AI tools and services, including Cursor and Cursor Agents, that improve products and productivity, and I keep the coding and delivery practices that make those tools effective.
 
 # Shown on the site. To feature a parked group, move its items into this list.
 skills:
@@ -14,12 +14,15 @@ skills:
  - Angular
  - React
  - Playwright
+ - Cursor
  - Powershell
  - JUnit5
  - SQL
+ - Snowflake
  - Docker
  - Kubernetes
  - AWS/Azure
+ - Datadog
  - CloudFormation
  - NestJS
  - RabbitMQ
@@ -60,15 +63,16 @@ roles:
    employer_description: Restaurant and Retail Software
    description:
     - Encourage the coding and SDLC practices that make LLMs more effective, including steering QA from AI-run manual testing to Playwright automation after that approach proved expensive
-    - Enable cloud-based development environments so AI tools are not limited to a single local machine, letting the team work on multiple tasks without slowing those machines
+    - Enable cloud-based development environments so Cursor and Cursor Agents are not limited to a single local machine, letting the team work on multiple tasks without slowing those machines
     - Standardize build automation, Snyk security testing, unit and integration tests, code review, release versioning, and deployment automation across old and new applications
     - Rewrite ShopCPQ in NestJS, replacing MongoDB queues with RabbitMQ and in-memory timers with Kubernetes jobs
     - Make JSDoc type safety and unit test coverage standard for JSRunner implementation repositories
     - Guide integration choices across n8n, Prismatic, and NestJS while supporting retail customers such as Knitwell Group and West Marine
     - Carry OAuth research for Concierge through to an implementation decision, and steer Concierge toward faster client integration, including Concierge AI
     - Move Neo toward reproducible builds and deployments
+    - Initially integrate Neo and Concierge AI with Datadog Real User Monitoring (RUM)
     - Partner with the Cloud team on production ownership, with a clear split between prod and non-prod and explicit access controls
-    - Support Multi-Location Reporting, Enterprise Solutions, and products including CAKE, MenuPad, and Concierge
+    - Integrate Multi-Location Reporting with Snowflake, and support Enterprise Solutions, CAKE, MenuPad, and Concierge
     - Mentor 7 retail engineers and advocate for simple, maintainable architecture in design decisions
  - title: Senior Software Developer (Contractor)
    start: Jan 2019
