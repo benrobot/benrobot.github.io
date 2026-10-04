@@ -29,7 +29,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
-        uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
+        uses: actions/checkout@v4
 
       - name: Install Word and PDF tools
         run: |
@@ -74,6 +74,18 @@ jobs:
           fi
           git commit -m "Generate resume PDF and Word files"
           git push origin "HEAD:${BRANCH}"
+
+      - name: Rebuild the private resume
+        if: github.ref == 'refs/heads/main' && (github.event_name == 'push' || github.event_name == 'workflow_dispatch')
+        env:
+          GH_TOKEN: ${{ secrets.PRIVATE_RESUME_DISPATCH_TOKEN }}
+        run: |
+          set -euo pipefail
+          if [ -z "${GH_TOKEN}" ]; then
+            echo "Private resume dispatch token is not set."
+            exit 0
+          fi
+          gh api --method POST repos/benrobot/benrobot.github.io.private/dispatches -f event_type=resume-updated
 
       - name: Request a GitHub Pages build
         if: github.event_name == 'push' && github.ref == 'refs/heads/main'

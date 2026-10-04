@@ -2,3 +2,6 @@ _site
 .sass-cache
 .jekyll-metadata
 .jekyll-cache
+private/
+benjamin-roedell-resume-private.docx
+benjamin-roedell-resume-private.pdf

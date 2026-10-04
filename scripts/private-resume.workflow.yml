@@ -1,0 +1,71 @@
+# Copy this file into the private repository benrobot/benrobot.github.io.private as
+# .github/workflows/private-resume.yml
+# It does not run from this public repository.
+
+name: Private resume
+
+on:
+  repository_dispatch:
+    types: [resume-updated]
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout this private repository
+        uses: actions/checkout@v4
+
+      - name: Checkout the public resume
+        uses: actions/checkout@v4
+        with:
+          repository: benrobot/benrobot.github.io
+          ref: main
+          path: public-site
+
+      - name: Install Word and PDF tools
+        run: |
+          set -euo pipefail
+          sudo apt-get update
+          sudo apt-get install -y libreoffice-writer fonts-crosextra-carlito
+          mkdir -p "${HOME}/.config/fontconfig"
+          cat > "${HOME}/.config/fontconfig/fonts.conf" <<'EOF'
+          <?xml version="1.0"?>
+          <!DOCTYPE fontconfig SYSTEM "fonts.dtd">
+          <fontconfig>
+            <alias>
+              <family>Calibri</family>
+              <prefer><family>Carlito</family></prefer>
+            </alias>
+          </fontconfig>
+          EOF
+          fc-cache -f
+
+      - name: Generate the private resume
+        env:
+          # Repository variables. This workflow runs only in the private repository.
+          RESUME_EMAIL: ${{ vars.RESUME_EMAIL }}
+          RESUME_PHONE: ${{ vars.RESUME_PHONE }}
+        run: |
+          set -euo pipefail
+          python3 -m pip install --user python-docx pyyaml
+          python3 public-site/scripts/generate_resume.py \
+            --docx benjamin-roedell-resume-private.docx
+          soffice --headless --convert-to pdf --outdir . benjamin-roedell-resume-private.docx
+          rm -rf public-site
+
+      - name: Commit the private files
+        run: |
+          set -euo pipefail
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add benjamin-roedell-resume-private.docx benjamin-roedell-resume-private.pdf
+          if git diff --cached --quiet; then
+            echo "Private resume files are unchanged."
+            exit 0
+          fi
+          git commit -m "Update the private resume"
+          git push
