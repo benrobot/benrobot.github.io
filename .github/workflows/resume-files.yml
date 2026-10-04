@@ -30,6 +30,8 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v4
+        with:
+          fetch-depth: 50
 
       - name: Install Word and PDF tools
         run: |
@@ -73,7 +75,21 @@ jobs:
             exit 0
           fi
           git commit -m "Generate resume PDF and Word files"
-          git push origin "HEAD:${BRANCH}"
+          # main can move while LibreOffice runs, usually from a preview commit.
+          for attempt in 1 2 3 4 5; do
+            if git push origin "HEAD:${BRANCH}"; then
+              exit 0
+            fi
+            echo "Push was rejected. Rebasing onto the latest ${BRANCH}."
+            git fetch --depth=50 origin "${BRANCH}"
+            if ! git rebase "origin/${BRANCH}"; then
+              git rebase --abort
+              echo "Could not rebase the resume commit."
+              exit 1
+            fi
+          done
+          echo "Could not push the resume commit."
+          exit 1
 
       - name: Rebuild the private resume
         if: github.ref == 'refs/heads/main' && (github.event_name == 'push' || github.event_name == 'workflow_dispatch')
