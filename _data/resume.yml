@@ -1,6 +1,6 @@
 intro_blurb: |
    I am a software architect and engineer. I work across application development, cloud infrastructure, and security, specializing in SOLID, clean code, and unit and integration testing.
-   I raise delivery quality through automation and advocate for simple, maintainable architecture.
+   I raise delivery quality through automation and advocate for simple, maintainable architecture. I promote AI tools and services that improve products and productivity, and I keep the coding and delivery practices that make those tools effective.
 
 # Shown on the site. To feature a parked group, move its items into this list.
 skills:
@@ -59,6 +59,8 @@ roles:
    employer: Mad Mobile, Tampa, FL
    employer_description: Restaurant and Retail Software
    description:
+    - Encourage the coding and SDLC practices that make LLMs more effective, including steering QA from AI-run manual testing to Playwright automation after that approach proved expensive
+    - Enable cloud-based development environments so AI tools are not limited to a single local machine, letting the team work on multiple tasks without slowing those machines
     - Standardize build automation, Snyk security testing, unit and integration tests, code review, release versioning, and deployment automation across old and new applications
     - Rewrite ShopCPQ in NestJS, replacing MongoDB queues with RabbitMQ and in-memory timers with Kubernetes jobs
     - Make JSDoc type safety and unit test coverage standard for JSRunner implementation repositories
