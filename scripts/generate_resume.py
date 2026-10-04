@@ -65,12 +65,29 @@ def set_run_font(run, size, bold=False):
     r_fonts.set(qn("w:cs"), FONT)
 
 
-def style_paragraph(paragraph, before=0, after=0, line=240):
+def style_paragraph(paragraph, before=0, after=0, line=240, exact=None):
     fmt = paragraph.paragraph_format
     fmt.space_before = Pt(before)
     fmt.space_after = Pt(after)
-    fmt.line_spacing = line / 240
-    fmt.line_spacing_rule = WD_LINE_SPACING.MULTIPLE
+    if exact is None:
+        fmt.line_spacing = line / 240
+        fmt.line_spacing_rule = WD_LINE_SPACING.MULTIPLE
+    else:
+        fmt.line_spacing = Pt(exact)
+        fmt.line_spacing_rule = WD_LINE_SPACING.EXACTLY
+    # Keep Word from snapping the line to the document grid or carrying
+    # a leftover line onto a new page.
+    p_pr = paragraph._p.get_or_add_pPr()
+    snap = p_pr.find(qn("w:snapToGrid"))
+    if snap is None:
+        snap = OxmlElement("w:snapToGrid")
+        p_pr.append(snap)
+    snap.set(qn("w:val"), "0")
+    widow = p_pr.find(qn("w:widowControl"))
+    if widow is None:
+        widow = OxmlElement("w:widowControl")
+        p_pr.append(widow)
+    widow.set(qn("w:val"), "0")
 
 
 def add_text(paragraph, text, size, bold=False):
@@ -114,7 +131,7 @@ def add_hyperlink(paragraph, text, url, size):
 
 def add_heading(doc, text):
     paragraph = doc.add_paragraph()
-    style_paragraph(paragraph, before=8, after=1)
+    style_paragraph(paragraph, before=4, after=1)
     add_text(paragraph, text.upper(), 11, bold=True)
     p_pr = paragraph._p.get_or_add_pPr()
     borders = OxmlElement("w:pBdr")
@@ -128,7 +145,7 @@ def add_heading(doc, text):
     return paragraph
 
 
-def add_body(doc, text, before=0, after=2):
+def add_body(doc, text, before=0, after=1):
     paragraph = doc.add_paragraph()
     style_paragraph(paragraph, before=before, after=after)
     add_text(paragraph, text, 11)
@@ -137,7 +154,8 @@ def add_body(doc, text, before=0, after=2):
 
 def add_bullet(doc, text):
     paragraph = doc.add_paragraph(style="List Bullet")
-    style_paragraph(paragraph, before=0, after=0)
+    # Exact leading stops Word from stretching the Symbol bullet font.
+    style_paragraph(paragraph, before=0, after=0, exact=13)
     add_text(paragraph, text, 10.5)
     return paragraph
 
@@ -165,18 +183,78 @@ def add_role(doc, role):
     left = f"{title}, {employer}"
     where = f"{employer} · {kind}" if kind else employer
     if text_inches(left, 11) + 0.25 + text_inches(dates, 11) <= 7.2:
-        add_dated_line(doc, left, dates, 11, True, before=3)
+        add_dated_line(doc, left, dates, 11, True, before=1)
         if kind:
             add_dated_line(doc, kind, "", 10.5, False)
     elif text_inches(title, 11) + 0.25 + text_inches(dates, 11) <= 7.2:
-        add_dated_line(doc, title, dates, 11, True, before=3)
+        add_dated_line(doc, title, dates, 11, True, before=1)
         add_dated_line(doc, where, "", 10.5, False)
     else:
-        add_dated_line(doc, title, "", 11, True, before=3)
+        add_dated_line(doc, title, "", 11, True, before=1)
         add_dated_line(doc, where, dates, 10.5, False)
     bullets = role.get("download_description") or role.get("description") or []
     for item in bullets:
         add_bullet(doc, strip_tags(item))
+
+
+def prepare_word_layout(doc):
+    """Keep Word on the same two pages as the PDF.
+
+    The template snaps every line to an 18pt grid and gives unused paragraphs
+    10pt of space after plus 1.15 line spacing. LibreOffice ignores both, so
+    the PDF stays at two pages while Word runs to three.
+    """
+    styles_el = doc.styles.element
+    defaults = styles_el.find(qn("w:docDefaults"))
+    if defaults is not None:
+        for spacing in defaults.findall(".//" + qn("w:spacing")):
+            spacing.set(qn("w:before"), "0")
+            spacing.set(qn("w:after"), "0")
+            spacing.set(qn("w:line"), "240")
+            spacing.set(qn("w:lineRule"), "auto")
+
+    normal = doc.styles["Normal"]._element
+    p_pr = normal.find(qn("w:pPr"))
+    if p_pr is None:
+        p_pr = OxmlElement("w:pPr")
+        normal.append(p_pr)
+    spacing = p_pr.find(qn("w:spacing"))
+    if spacing is None:
+        spacing = OxmlElement("w:spacing")
+        p_pr.append(spacing)
+    spacing.set(qn("w:before"), "0")
+    spacing.set(qn("w:after"), "0")
+    spacing.set(qn("w:line"), "240")
+    spacing.set(qn("w:lineRule"), "auto")
+
+    numbering = doc.part.numbering_part._element
+    for level in numbering.findall(".//" + qn("w:lvl")):
+        style = level.find(qn("w:pStyle"))
+        if style is None or style.get(qn("w:val")) != "ListBullet":
+            continue
+        level_text = level.find(qn("w:lvlText"))
+        if level_text is not None:
+            level_text.set(qn("w:val"), "•")
+        r_pr = level.find(qn("w:rPr"))
+        if r_pr is None:
+            r_pr = OxmlElement("w:rPr")
+            level.append(r_pr)
+        r_fonts = r_pr.find(qn("w:rFonts"))
+        if r_fonts is None:
+            r_fonts = OxmlElement("w:rFonts")
+            r_pr.insert(0, r_fonts)
+        for attr in ("w:ascii", "w:hAnsi", "w:cs"):
+            r_fonts.set(qn(attr), FONT)
+        for tag, value in (("w:sz", "21"), ("w:szCs", "21")):
+            size = r_pr.find(qn(tag))
+            if size is None:
+                size = OxmlElement(tag)
+                r_pr.append(size)
+            size.set(qn("w:val"), value)
+
+    grid = doc.sections[0]._sectPr.find(qn("w:docGrid"))
+    if grid is not None:
+        grid.getparent().remove(grid)
 
 
 def add_contact(paragraph, email, phone):
@@ -224,6 +302,7 @@ def build(resume, config, email="", phone=""):
     normal.font.color.rgb = INK
     normal._element.rPr.rFonts.set(qn("w:ascii"), FONT)
     normal._element.rPr.rFonts.set(qn("w:hAnsi"), FONT)
+    prepare_word_layout(doc)
 
     name = doc.add_paragraph()
     style_paragraph(name, after=0)

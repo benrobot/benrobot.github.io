@@ -4,8 +4,11 @@
 		<div class="identity">
 			<p class="identity-kicker">{{ site.location }}</p>
 			<h1 class="identity-name"><a href="#content">{{ site.name }}</a></h1>
-			{% assign current_role = site.data.resume.roles.first %}
-			<p class="identity-role">{{ current_role.title }}</p>
+			{%- assign headline = site.data.resume.download.headline -%}
+			{%- if headline == nil or headline == "" -%}
+			{%- assign headline = site.data.resume.roles.first.title -%}
+			{%- endif -%}
+			<p class="identity-role">{{ headline }}</p>
 		</div>
 		<nav class="site-nav" aria-label="Profiles">
 			<ul>
