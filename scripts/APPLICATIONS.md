@@ -9,7 +9,7 @@ This file is not published on the site. Read it before customizing a resume for 
 ## Decisions already made
 
 - Each application is a folder on `main` in the private repository, not a branch.
-- Folder name: `applications/YYYY-MM-DD-company-role/`. The date is the day the resume is customized. Use lowercase hyphens. Do not rename a folder after it is created.
+- Folder name: `applications/YYYY-MM-DD-company-role/`. The date is the day the resume is customized in the configured time zone, not the runner's UTC date. Use lowercase hyphens. Do not rename a folder after it is created. Set `timezone` in `scripts/applications.yml` to an IANA name. `RESUME_TIMEZONE` overrides that file. `--date` overrides both.
 - The folder contains `posting.md`, `resume.yml`, `resume.diff`, `notes.md`, `benjamin-roedell-resume.docx`, and `benjamin-roedell-resume.pdf`.
 - `applications/index.md` is a table of those folders. Status stays in each `notes.md` (`draft`, `applied`, `screen`, `interview`, `offer`, `closed`).
 - `resume.yml` in the folder is a full copy of the customized source. It must not contain an email address or a phone number. `resume.diff` is the unified diff of that file against the public `_data/resume.yml` at the source commit, so the customization is visible without reading the whole copy.
@@ -50,6 +50,8 @@ python3 scripts/new_application.py \
 ```
 
 `--resume` defaults to `_data/resume.yml`. `--contact` may be omitted when `RESUME_EMAIL` and `RESUME_PHONE` are set. Never print those values. Never commit `private/contact.yml`.
+
+The folder date defaults to today in `timezone` from `scripts/applications.yml` (`America/New_York`). Set `RESUME_TIMEZONE` to an IANA name to use a different zone for one run. Pass `--date YYYY-MM-DD` to choose the day explicitly.
 
 `posting.md` is the job text the user pasted, unchanged, with the URL at the top when they supplied one. `notes.md` records the public commit in `Source commit` and points at `resume.diff`. The user fills in the communication log.
 
