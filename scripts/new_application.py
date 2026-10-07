@@ -11,8 +11,9 @@ import os
 import re
 import subprocess
 import sys
-from datetime import date
+from datetime import datetime
 from pathlib import Path
+from zoneinfo import ZoneInfo, ZoneInfoNotFoundError
 
 import yaml
 
@@ -20,8 +21,40 @@ from resume_diff import write_resume_diff
 
 ROOT = Path(__file__).resolve().parents[1]
 GENERATOR = ROOT / "scripts" / "generate_resume.py"
+TIMEZONE_FILE = ROOT / "scripts" / "applications.yml"
 DOCX_NAME = "benjamin-roedell-resume.docx"
 PDF_NAME = "benjamin-roedell-resume.pdf"
+
+
+def timezone_name():
+    """IANA name for the application folder date.
+
+    RESUME_TIMEZONE overrides scripts/applications.yml. An empty result means
+    the runner's local date.
+    """
+    name = os.environ.get("RESUME_TIMEZONE", "").strip()
+    if name:
+        return name
+    if not TIMEZONE_FILE.is_file():
+        return ""
+    loaded = yaml.safe_load(TIMEZONE_FILE.read_text(encoding="utf-8")) or {}
+    if not isinstance(loaded, dict):
+        raise SystemExit(f"{TIMEZONE_FILE.name} must be a mapping with a timezone key.")
+    return str(loaded.get("timezone") or "").strip()
+
+
+def folder_today():
+    """Today's date in the configured time zone, plus the zone name used."""
+    name = timezone_name()
+    if not name:
+        return datetime.now().date(), ""
+    try:
+        zone = ZoneInfo(name)
+    except ZoneInfoNotFoundError:
+        raise SystemExit(
+            f"Unknown time zone {name!r}. Use an IANA name such as America/New_York."
+        ) from None
+    return datetime.now(zone).date(), name
 
 
 def slug(value, limit=48):
@@ -155,11 +188,23 @@ def main():
     parser.add_argument("--url", default="", help="Posting URL. Written at the top of posting.md when missing.")
     parser.add_argument("--resume", type=Path, help="Customized resume YAML. Defaults to _data/resume.yml.")
     parser.add_argument("--contact", type=Path, help="Untracked YAML with email and phone.")
-    parser.add_argument("--date", default=date.today().isoformat(), help="Folder date, YYYY-MM-DD.")
+    parser.add_argument(
+        "--date",
+        default=None,
+        help="Folder date, YYYY-MM-DD. Defaults to today in the configured time zone.",
+    )
     args = parser.parse_args()
 
-    if not re.fullmatch(r"\d{4}-\d{2}-\d{2}", args.date):
+    if args.date:
+        when = args.date
+        zone = ""
+    else:
+        today, zone = folder_today()
+        when = today.isoformat()
+    if not re.fullmatch(r"\d{4}-\d{2}-\d{2}", when):
         raise SystemExit("--date must be YYYY-MM-DD.")
+    if zone:
+        print(f"Folder date: {when} ({zone})")
     dest = args.dest if args.dest.is_absolute() else Path.cwd() / args.dest
     dest = dest.resolve()
     root = ROOT.resolve()
@@ -180,7 +225,7 @@ def main():
             raise SystemExit(f"Contact file not found: {contact}")
     require_contact(contact)
 
-    folder_name = f"{args.date}-{slug(args.company)}-{slug(args.role)}"
+    folder_name = f"{when}-{slug(args.company)}-{slug(args.role)}"
     folder = dest / "applications" / folder_name
     if folder.exists():
         raise SystemExit(f"Application folder already exists: {folder}")
@@ -189,7 +234,7 @@ def main():
     (folder / "resume.yml").write_text(resume_src.read_text(encoding="utf-8"), encoding="utf-8")
     commit = source_commit()
     write_posting(folder, posting, args.url.strip())
-    write_notes(folder, args.company.strip(), args.role.strip(), args.url.strip(), args.date, commit)
+    write_notes(folder, args.company.strip(), args.role.strip(), args.url.strip(), when, commit)
     write_resume_diff(folder, commit)
     build_files(folder, contact)
 
@@ -197,7 +242,7 @@ def main():
     role = args.role.replace("|", "/")
     upsert_index(
         dest / "applications" / "index.md",
-        f"| {args.date} | {company} | {role} | draft | {folder_name} |",
+        f"| {when} | {company} | {role} | draft | {folder_name} |",
     )
     print(folder)
 
