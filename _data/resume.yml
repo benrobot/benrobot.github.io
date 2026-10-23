@@ -126,7 +126,7 @@ roles:
  - title: <span title="Awesome Software Developer">Senior Software Developer</span>
    start: Sep 2015
    end: Jul 2019
-   employer: Applicant Insight / NoMoreForms, New Port Richey, FL
+   employer: Applicant Insight, New Port Richey, FL
    employer_description: Background Investigation and Applicant Processing
    description:
     - Debug and diagnose obscure race conditions in various environments (JavaScript, Java, SQL)
