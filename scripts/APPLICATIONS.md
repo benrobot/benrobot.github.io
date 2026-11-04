@@ -21,7 +21,7 @@ This file is not published on the site. Read it before customizing a resume for 
 
 Start from the current public `_data/resume.yml`. Do not start from a previous application's `resume.yml`.
 
-These fields may change to match the posting:
+These fields may change to fit the posting:
 
 - `download.headline`
 - `intro_blurb`
@@ -30,7 +30,7 @@ These fields may change to match the posting:
 
 Move a skill forward, or from `parked` into `skills`, only when the experience text already supports it. Dates, employers, and job titles stay as they are. The Mad Mobile title stays Solution Architect. Do not invent metrics, tools, or employers.
 
-Use `download.headline` for the role family in the posting. Software Architect and Engineer is the default. Use Solution Architect only when that is the posting's title.
+Use `download.headline` for the kind of work, not the posting's title. Software Architect and Engineer is the default. Leave that default when the posting is a staff, principal, senior, or other seniority level of the same work. Change the headline only when the posting is a different kind of role, and then use a short general phrase rather than the job title. Do not copy a slash title. Use Solution Architect only when that is the posting's title.
 
 After generation, the PDF must be 2 pages. If `new_application.py` prints a page-count warning, shorten the summary or the bullet selection and run it again before committing. Delete the rejected folder first, because the script will not overwrite an existing folder.
 
