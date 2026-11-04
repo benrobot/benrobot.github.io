@@ -1,4 +1,0 @@
-# IANA time zone for the date stamped on application folders.
-# Runners often use UTC, so an evening in this zone would otherwise land on the next day.
-# RESUME_TIMEZONE overrides this file. --date overrides both.
-timezone: America/New_York
